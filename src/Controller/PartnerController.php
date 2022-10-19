@@ -19,11 +19,22 @@ class PartnerController extends AbstractController
         $form = $this->createForm(PartnerType::class, $partner);
         $form->handleRequest($request);
 
+
+
         if ($form->isSubmitted() && $form->isValid())
         {
+            $currentRole = $partner->getUser()->getRoles();
+            if(!in_array( "ROLE_PARTNER", $currentRole, $strict = false))
+            {
+                $currentRole[] = "ROLE_PARTNER";
+            }
+            $partner->getUser()->setRoles($currentRole);
             $entityManager->persist($partner);
             $entityManager->flush();
             // do anything else you need here, like send an email
+
+
+
 
             return $this->redirectToRoute('app_home');
         }

@@ -21,6 +21,12 @@ class StructureController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
+            $currentRole = $structure->getUser()->getRoles();
+            if(!in_array( "ROLE_STRUCTURE", $currentRole, $strict = false))
+            {
+                $currentRole[] = "ROLE_STRUCTURE";
+            }
+            $structure->getUser()->setRoles($currentRole);
             $entityManager->persist($structure);
             $entityManager->flush();
             // do anything else you need here, like send an email
