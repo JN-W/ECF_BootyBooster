@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ServiceController!{% endblock %}
+
+{% block body %}
+    <h1>Création d'un service</h1>
+
+    {{ form_start(serviceCreationForm) }}
+    {{ form_row(serviceCreationForm.title) }}
+    {{ form_row(serviceCreationForm.structures) }}
+    {{ form_row(serviceCreationForm.partners) }}
+
+    <button type="submit" class="btn">Créer ce service</button>
+    {{ form_end(serviceCreationForm) }}
+{% endblock %}

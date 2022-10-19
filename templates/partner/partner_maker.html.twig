@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PartnerController!{% endblock %}
+
+{% block body %}
+    <h1>Création d'un partenaire</h1>
+
+    {{ form_start(partnerCreationForm) }}
+    {{ form_row(partnerCreationForm.name) }}
+    {{ form_row(partnerCreationForm.description) }}
+    {{ form_row(partnerCreationForm.user) }}
+    {{ form_row(partnerCreationForm.service) }}
+
+    <button type="submit" class="btn">Créer ce partenaire</button>
+    {{ form_end(partnerCreationForm) }}
+{% endblock %}

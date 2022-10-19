@@ -172,4 +172,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+//    Fonction ajoutée pour afficher convertir un user en string
+    public function __toString():string
+    {
+        return$this->getEmail();
+    }
 }

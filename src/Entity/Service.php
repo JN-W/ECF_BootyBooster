@@ -100,4 +100,9 @@ class Service
 
         return $this;
     }
+
+    Public function __toString() : string
+    {
+        Return $this->getTitle();
+    }
 }

@@ -113,4 +113,9 @@ class Structure
 
         return $this;
     }
+
+    Public function __toString() : string
+    {
+        Return $this->getAddress();
+    }
 }

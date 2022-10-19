@@ -147,4 +147,9 @@ class Partner
 
         return $this;
     }
+
+    Public function __toString() : string
+    {
+        Return $this->getName();
+    }
 }

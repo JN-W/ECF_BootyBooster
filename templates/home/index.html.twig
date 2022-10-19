@@ -12,9 +12,15 @@
         <h1>ECF 3ème du nom</h1>
         {% if is_granted('ROLE_USER') %}
             <a href=" {{ path('app_register') }} ">Créer un nouvel utilisateur</a><br>
+            <a href=" {{ path('app_partner_creation') }} ">Créer un nouveau partenaire</a><br>
+            <a href=" {{ path('app_structure_creation') }} ">Créer une nouvelle structure</a><br>
+            <a href=" {{ path('app_service_creation') }} ">Créer un nouveau service</a><br>
             <a href=" {{ path('app_logout') }} ">Se déconnecter</a>
         {% else %}
             <a href=" {{ path('app_register') }} ">Créer un nouvel utilisateur</a><br>
+            <a href=" {{ path('app_partner_creation') }} ">Créer un nouveau partenaire</a><br>
+            <a href=" {{ path('app_structure_creation') }} ">Créer une nouvelle structure</a><br>
+            <a href=" {{ path('app_service_creation') }} ">Créer un nouveau service</a><br>
             <a href=" {{ path('app_login') }} ">Se connecter</a>
         {% endif %}
     </div>
