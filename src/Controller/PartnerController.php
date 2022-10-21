@@ -91,5 +91,17 @@ class PartnerController extends AbstractController
         return $this->redirectToRoute('app_partner_home');
     }
 
+    #[Route('/partner/activation/{id}', name: 'app_partner_activation')]
+    public function partner_activater(Partner $partner, ManagerRegistry $doctrine)
+    {
+        // Vérification à faire
+        $partner->setIsActive(($partner->isIsActive()) ? false : true);
+
+        $entityManager=$doctrine->getManager();
+        $entityManager->persist($partner);
+        $entityManager->flush();
+
+        return new Response('true');
+    }
 
 }

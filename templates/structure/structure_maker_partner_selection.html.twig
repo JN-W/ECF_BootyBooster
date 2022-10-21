@@ -12,15 +12,11 @@
 
         <div class="col">
             <div class="row text-center">
-                <h1>Liste des partenaires</h1>
+                <h1>Choix du partenaire</h1>
             </div>
-{#-----------------------------#}
             <div class="row">
                 <p> Choisissez à quel partenaire sera affecté cette nouvelle structure </p>
             </div>
-
-
-            {#-----------------------------#}
             <div class="row">
                 <table class="table .table-hover">
                     <thead>
@@ -30,17 +26,15 @@
                         <th scope="col">Description</th>
                         <th scope="col">Structures</th>
                         <th scope="col">Services souscrits par le partenaire</th>
-
                     </tr>
                     </thead>
                     <tbody class="table-group-divider">
                     {% for partner in partners %}
-
                         <tr>
                             <th scope="row">{{ partner.name }}</th>
-                                <td>
-                                    <a href="{{path('app_structure_test_step_structure', {'id': partner.id})}}" class="btn btn-warning m-md-2"><i class="bi bi-pen"></i></a>
-                                </td>
+                            <td>
+                                <a href="{{path('app_structure_creation_structure_data', {'id': partner.id})}}" class="btn btn-warning m-md-2"><i class="bi bi-pen"></i></a>
+                            </td>
                             <td>{{ partner.description }}</td>
                             <td>
                                 <ul class="list-group list-group-flush">
@@ -58,21 +52,10 @@
                             </td>
                         </tr>
                     {% endfor %}
-
                     </tbody>
                 </table>
             </div>
 
-
-
-
-
-            {#-----------------------------#}
-
-
-
-
-{#-----------------------------#}
         </div>
     </div>
 {% endblock %}

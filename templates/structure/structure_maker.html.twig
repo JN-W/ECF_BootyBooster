@@ -5,12 +5,22 @@
 {% block body %}
     <h1>Création d'une structure</h1>
 
+    <p>Le partenaire que vous avez choisi pour cette nouvelle structure est : </p>
+    <p>{{ partner.name }}</p>
+    <p>La structure sera créee avec les services de son partenaire.</p><br>
+    <p>Les services de la structure peuvent être modifiés par la suite.</p>
+    <p>
+        <ul class="list-group list-group-flush">
+            {%  for key, service in partner.service %}
+                <li class="list-group-item">{{ partner.service | slice(key, 1)| join(', ') }}</li>
+            {% endfor %}
+        </ul>
+    </p>
+
     {{ form_start(structureCreationForm) }}
-    {{ form_row(structureCreationForm.partner) }}
     {{ form_row(structureCreationForm.address) }}
     {{ form_row(structureCreationForm.is_active) }}
     {{ form_row(structureCreationForm.user) }}
-    {{ form_row(structureCreationForm.service) }}
 
     <button type="submit" class="btn">Ajouter cette structure à ce partenaire</button>
     {{ form_end(structureCreationForm) }}
