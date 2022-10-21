@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+
+    <div class=" row ">
+        {# menuCommun is the left col in display #}
+        {{ include('partial/_menuCommun.html.twig') }}
+
+        {# Therefore the following must be in a col also #}
+
+        <div class="col">
+            <div class="row">
+                <h1>ECF 3ème du nom</h1>
+            </div>
+            <div class="row">
+                {% if is_granted('ROLE_USER') %}
+                    <a href=" {{ path('app_register') }} ">Créer un nouvel utilisateur</a><br>
+                    <a href=" {{ path('app_partner_creation') }} ">Créer un nouveau partenaire</a><br>
+                    <a href=" {{ path('app_structure_creation') }} ">Créer une nouvelle structure</a><br>
+                    <a href=" {{ path('app_service_creation') }} ">Créer un nouveau service</a><br>
+                    <a href=" {{ path('app_partner_home') }} ">partner_home</a>
+                    <a href=" {{ path('app_logout') }} ">Se déconnecter</a>
+                {% else %}
+                    <a href=" {{ path('app_register') }} ">Créer un nouvel utilisateur</a><br>
+                    <a href=" {{ path('app_partner_creation') }} ">Créer un nouveau partenaire</a><br>
+                    <a href=" {{ path('app_structure_creation') }} ">Créer une nouvelle structure</a><br>
+                    <a href=" {{ path('app_service_creation') }} ">Créer un nouveau service</a><br>
+                    <a href=" {{ path('app_login') }} ">Se connecter</a>
+                    <a href=" {{ path('app_partner_home') }} ">partner_home</a>
+{#                    <a href=" {{ path('app_partner_test') }} ">partner_test</a>#}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

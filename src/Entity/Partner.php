@@ -112,6 +112,12 @@ class Partner
         return $this;
     }
 
+    // A voir si ça sert
+//    public function hasStructure():bool
+//    {
+//        return  ($this->structures->isEmpty()) ? False : True ;
+//    }
+
     public function removeStructure(Structure $structure): self
     {
         if ($this->structures->removeElement($structure)) {
@@ -152,4 +158,6 @@ class Partner
     {
         Return $this->getName();
     }
+
+
 }

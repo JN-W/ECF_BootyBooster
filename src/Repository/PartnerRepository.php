@@ -39,6 +39,11 @@ class PartnerRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllOrderedByName()
+    {
+        return $this->findBy([],['name'=>'asc']);
+    }
+
 //    /**
 //     * @return Partner[] Returns an array of Partner objects
 //     */
@@ -63,4 +68,105 @@ class PartnerRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
+// ------------- RESIDUS DE TESTS --------------------
+//
+//    public function findPartnerWithAssociatedStructureAndService(): ?array
+//    {
+//        $conn = $this->getEntityManager()->getConnection();
+//
+//        $sql = '
+//        SELECT *
+//        FROM partner p
+//        LEFT OUTER JOIN
+//            structure ON p.id = structure.partner_id
+//        LEFT OUTER JOIN
+//            partner_service ON p.id = partner_service.partner_id
+//        LEFT OUTER JOIN
+//            service ON partner_service.service_id = service.id
+//        ORDER BY
+//            p.name ASC,
+//            `structure`.`address` ASC,
+//            `service`.`title` ASC';
+//
+//        $stmt = $conn->prepare($sql);
+//        $resultSet = $stmt->executeQuery([])->fetchAllAssociative();
+//
+//        return $resultSet;
+//    }
+//
+//
+//    public function findPartnerWithAssociatedStructure(): ?array
+//    {
+//        $conn = $this->getEntityManager()->getConnection();
+//
+//        $sql = '
+//        SELECT *
+//        FROM partner p
+//        LEFT OUTER JOIN
+//            structure ON p.id = structure.partner_id
+//        LEFT OUTER JOIN
+//            partner_service ON p.id = partner_service.partner_id
+//        LEFT OUTER JOIN
+//            service ON partner_service.service_id = service.id
+//        ORDER BY
+//            p.name ASC,
+//            `structure`.`address` ASC,
+//            `service`.`title` ASC';
+//
+//        $stmt = $conn->prepare($sql);
+//        $resultSet = $stmt->executeQuery([])->fetchAllAssociative();
+//
+//        return $resultSet;
+//    }
+
+
+//    public function findPartnerWithAssociatedStructure(): ?array
+//    {
+//        $conn = $this->getEntityManager()->getConnection();
+//
+//        $sql = '
+//        SELECT *
+//        FROM partner p
+//        LEFT OUTER JOIN
+//            structure ON p.id = structure.partner_id
+//
+//        ORDER BY
+//            p.name ASC,
+//            `structure`.`address` ASC';
+//
+//
+//        $stmt = $conn->prepare($sql);
+//        $resultSet = $stmt->executeQuery([])->fetchAllAssociative();
+//        return $resultSet;
+//    }
+//
+//
+//
+//
+//    public function findPartnerWithAssociatedService(): ?array
+//    {
+//        $conn = $this->getEntityManager()->getConnection();
+//
+//        $sql = '
+//        SELECT *
+//        FROM partner p
+//
+//        LEFT OUTER JOIN
+//            partner_service ON p.id = partner_service.partner_id
+//        LEFT OUTER JOIN
+//            service ON partner_service.service_id = service.id
+//        ORDER BY
+//            p.name ASC,
+//            `service`.`title` ASC';
+//
+//
+//        $stmt = $conn->prepare($sql);
+//        $resultSet = $stmt->executeQuery([])->fetchAllAssociative();
+//
+//        return $resultSet;
+//
+//    }
+// ------------------------------------FIN RESIDUS -------------
 }
