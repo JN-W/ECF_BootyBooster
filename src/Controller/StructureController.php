@@ -42,6 +42,7 @@ class StructureController extends AbstractController
         ]);
     }
 
+    // STEP 1 of structure creation : partner choice
     #[Route('/structure/creation/partner_selection', name: 'app_structure_creation_partner_selection')]
     public function structureMakerTestStepPartner(ManagerRegistry $doctrine): Response
     {
@@ -62,7 +63,7 @@ class StructureController extends AbstractController
         ]);
     }
 
-        // STEP 2 of structure creation
+        // STEP 2 of structure creation : structure building
         #[Route('/structure/creation/{id}/structure_data', name: 'app_structure_creation_structure_data')]
         #[ParamConverter('partner', class: 'SensioBlogBundle:Partner')]
         public function structureMakerStepStructure(Request $request, Partner $partner, EntityManagerInterface $entityManager): Response
@@ -70,15 +71,10 @@ class StructureController extends AbstractController
         // Get chosen partner service to apply to new structure
         $partner_service = $partner->getService();
 
-        // Prepare structure entity manager
-//        $entityManager = $doctrine->getRepository(Structure::class);
-
         // Build new structure
         $structure = new Structure();
-
         // Define partner chosen
         $structure->setPartner($partner);
-
         // Add chosen partner services to structure
         foreach($partner_service as $service)
         {
@@ -96,16 +92,12 @@ class StructureController extends AbstractController
             {
                 $currentRole[] = "ROLE_STRUCTURE";
             }
-
             $structure->getUser()->setRoles($currentRole);
-//            dd($structure);
-
             $entityManager->persist($structure);
-
             $entityManager->flush();
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('partner/app_partner_home');
         }
 
         return $this->render('structure/structure_maker.html.twig', [

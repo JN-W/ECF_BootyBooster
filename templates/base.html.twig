@@ -19,7 +19,10 @@
 
         {% block body %}{% endblock %}
 
+        {{ include('partial/_partnerSearcherModal.html.twig') }}
         {{ include('partial/_js.html.twig')}}
+        {{ include('partial/_partnerSearcherAjax.html.twig')}}
+
 
     </body>
 </html>

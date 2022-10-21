@@ -7,6 +7,7 @@ use App\Form\PartnerType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -103,5 +104,36 @@ class PartnerController extends AbstractController
 
         return new Response('true');
     }
+
+    #[Route('/partner/recherche', name: 'app_partner_searcher', methods: ['POST']  )]
+    public function partner_searcher( ManagerRegistry $doctrine, Request $request)
+    {
+        $userSearchText = $request->request->get('userSearchText');
+
+        $repository = $doctrine->getRepository(Partner::class);
+        $searchResults = $repository->findByWord($userSearchText);
+
+        // J'initialise un tableau vide
+        $formated_partner=[];
+        $JSON_formated_partner=[];
+
+        // Boucle sur les résultats de la recherche pour parcourir les partners trouvés un par un ($Result)
+        foreach ($searchResults as $Result ){
+            // Je transforme le partner en un array de 2 éléments
+            $Format_Result = $Result->GetFormat();
+            $JSON_Format_Result = json_encode($Result->GetFormat());
+            // Je la push à la fin de mon tableau de collecte des résultats
+            array_push($formated_partner,$Format_Result);
+            array_push($JSON_formated_partner,$JSON_Format_Result);
+            // TO DO : affiché l'état actif/inactif
+        }
+
+
+        // Envoi de la réponse en JSON
+        return new JsonResponse($JSON_formated_partner);
+
+
+    }
+
 
 }

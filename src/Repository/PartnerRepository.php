@@ -44,6 +44,18 @@ class PartnerRepository extends ServiceEntityRepository
         return $this->findBy([],['name'=>'asc']);
     }
 
+    public function findByWord($keyword):array
+    {
+        $result=  $this
+            ->createQueryBuilder('a')
+            ->where('lower(a.name) LIKE :key')
+            ->setParameter('key' , $keyword.'%')
+            ->getQuery()
+            ->getResult();
+
+        return $result;
+    }
+
 //    /**
 //     * @return Partner[] Returns an array of Partner objects
 //     */

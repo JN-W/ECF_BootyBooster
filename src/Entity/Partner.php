@@ -159,5 +159,14 @@ class Partner
         Return $this->getName();
     }
 
+    public function getFormat():array
+    {
+        $formatedPartner = [];
+        $formatedPartner += [
+            'id' => $this->getId(),
+            'name' => $this->getName()
+        ];
+        return $formatedPartner;
+    }
 
 }

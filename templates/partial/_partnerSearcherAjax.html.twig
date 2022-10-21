@@ -1,0 +1,53 @@
+
+
+<script>
+    //Ouverture jquery
+    $(() => {
+
+        // Ajout évènement sur barre de recherche
+        $('#search-partner').keyup(function () {
+            let userSearchText = $(this).val();
+            userSearchText = encodeURIComponent(userSearchText).toLowerCase();
+
+            if (userSearchText !== "")
+            {
+                $.ajax
+                (
+                    {
+                        type: 'POST',
+                        url: '{{ path('app_partner_searcher') }}',
+                        data: {userSearchText: userSearchText},
+                        success: function (data){
+                            $('.search-result').remove();
+                            if (data !== "")
+                            {
+                                // TO DO : ne pas lancer la requête AJAX pour l'appui de touches type MAJ ou CTRL
+
+                                for (let i = 0; i < data.length; i++) {
+                                    let current = JSON.parse(data[i]);
+                                    $('#search-partner-result').append(`<a class="search-result list-group-item list-group-item-action" href="#" >${current['name']}</a>`);
+                                }
+                            }
+                        }
+
+                    }
+                )
+            }
+        })
+
+        //Focus on search field while modal pop up
+        $("#exampleModal").on("shown.bs.modal", function(){
+            $(this).find("input").first().focus();
+        })
+
+        // Clean old results and input field when closed
+        $("#exampleModal").on("hidden.bs.modal", function(){
+            $('#search-partner').val('');
+            $('.search-result').remove();
+            // $('.search-partner-result').empty();
+        })
+
+
+        //Fermeture jquery
+    });
+</script>
