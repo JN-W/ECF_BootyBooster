@@ -15,5 +15,21 @@ jQuery(document).ready(() => {
     }
 
 
+    // Modal de confirmation
+    // var theHref;
+    $('a.btn-delete').click(function(e) {
+        e.preventDefault();
+        theHREF = $(this).attr("href");
+        $('#deleteConfirmModal').modal('show');
+    });
+
+    $("#confirmModalYes").click(function(e) {
+        window.location.href = theHREF;
+    });
+
+    $("#confirmModalNo").click(function(e) {
+        $("#deleteConfirmModal").modal("hide");
+    });
+
 // Fermeture jquery
 })
