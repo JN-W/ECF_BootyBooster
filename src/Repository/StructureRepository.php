@@ -63,4 +63,32 @@ class StructureRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+//    public function countStructureWithThisService($id)
+//    {
+//
+//        return $this->createQueryBuilder('s')
+//            ->leftJoin('structure_service','ss', 's.id = ss.structure_id')
+//            ->andWhere('s.partner_id = :id')
+//            ->setParameter('id', $id)
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//
+//         tentative de faire la même en sql directement
+//        $conn = $this->getEntityManager()->getConnection();
+//
+//        $sql = '
+//        SELECT * FROM structure s
+//        LEFT OUTER JOIN structure_service ON s.id = structure_service.structure_id
+//        WHERE s.partner_id=$id';
+//
+//        $stmt = $conn->prepare($sql);
+//        $resultSet = $stmt->executeQuery([])->fetchAllAssociative();
+//
+//        return $resultSet;
+//
+//    }
+
+
 }

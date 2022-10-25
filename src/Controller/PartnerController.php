@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Partner;
+use App\Entity\Structure;
 use App\Form\PartnerType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -131,9 +132,33 @@ class PartnerController extends AbstractController
 
         // Envoi de la réponse en JSON
         return new JsonResponse($JSON_formated_partner);
-
-
     }
 
+    #[Route('/partner/detail/{id}', name: 'app_partner_detail')]
+    public function displayPartner(Partner $partner, ManagerRegistry $doctrine): Response
+    {
+        // Get all structures from this partner and their services
+        $partner_service = $partner->getService();
+        $partner_structure = $partner->getStructures();
+        $partnerId = $partner->getId();
+//        dump($partner_structure);
+        $result = [];
+        foreach($partner_structure as $structure){
+            $result[$structure->getAddress()] = $structure->getService()->getValues();
+            dump($result);
 
+        }
+
+//        // Count how many structure use each service
+//        $structureRepository = $doctrine->getRepository(Structure::class);
+//        $count = $structureRepository->countStructureWithThisService($partnerId);
+//        dump($count);
+
+        return $this->render('partner/partner_test.html.twig', [
+            'partner' => $partner,
+            'result' => $result,
+            'globalService' => $partner_service,
+//            'count' => $count
+        ]);
+    }
 }

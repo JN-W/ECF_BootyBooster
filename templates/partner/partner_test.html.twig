@@ -12,67 +12,72 @@
 
         <div class="col">
             <div class="row text-center">
-                <h1>Liste des partenaires</h1>
+                <h1>Tableau de bord de {{ partner.name }}</h1>
             </div>
-{#-----------------------------#}
+
             <div class="row">
-                <p> Choisissez à quel partenaire sera affecté cette nouvelle structure </p>
+                {#-----------PARTNER STRUCTURES LIST------------#}
+                 {%  for  structure, serviceArray in result %}
+                <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Franchises affiliées</h5>
+{#                        <p class="card-text">{{ partner.structures | slice(key, 1)| join(', ') }}</p>#}
+                        <p class="card-text">{{ structure }}</p>
+                    </div>
+{#                    <ul class="list-group list-group-flush">#}
+{#                        {%  for  key,service in serviceArray %}#}
+{#                            {% if service in globalService %}#}
+{#                            <li class="list-group-item bg-warning"> {{ service}} </li>#}
+{#                            {% endif %}#}
+{#                        {% endfor %}#}
+{#                    </ul>#}
+                    <ul>
+                        {%  for key, service in partner.service %}
+                            {% if service in serviceArray %}
+
+                            <li class="list-group-item text-success">{{ partner.service | slice(key, 1)| join(', ') }}</li>
+                            {% else %}
+                            <li class="list-group-item text-danger ">{{ partner.service | slice(key, 1)| join(', ') }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
+            {#-----------------------#}
 
-
-            {#-----------------------------#}
+            {#------------PARTNER GLOBAL SERVICES-----------#}
             <div class="row">
-                <table class="table .table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Sélection</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Structures</th>
-                        <th scope="col">Services souscrits par le partenaire</th>
 
-                    </tr>
-                    </thead>
-                    <tbody class="table-group-divider">
-                    {% for partner in partners %}
+                <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Services du partenaire</h5>
+                        <p class="card-text">Voici les services globaux du partenaire dont ses structures peuvent bénéficier</p>
+                    </div>
 
-                        <tr>
-                            <th scope="row">{{ partner.name }}</th>
-                                <td>
-                                    <a href="{{path('app_structure_test_step_structure', {'id': partner.id})}}" class="btn btn-warning m-md-2"><i class="bi bi-pen"></i></a>
-                                </td>
-                            <td>{{ partner.description }}</td>
-                            <td>
-                                <ul class="list-group list-group-flush">
-                                    {%  for key, structure in partner.structures %}
-                                        <li class="list-group-item">{{ partner.structures | slice(key, 1)| join(', ') }}</li>
-                                    {% endfor %}
-                                </ul>
-                            </td>
-                            <td>
-                                <ul class="list-group list-group-flush">
-                                    {%  for key, service in partner.service %}
-                                        <li class="list-group-item">{{ partner.service | slice(key, 1)| join(', ') }}</li>
-                                    {% endfor %}
-                                </ul>
-                            </td>
-                        </tr>
-                    {% endfor %}
-
-                    </tbody>
-                </table>
+                    <ul class="list-group list-group-flush">
+                        {%  for key, service in partner.service %}
+                            <li class="list-group-item">{{ partner.service | slice(key, 1)| join(', ') }}</li>
+                        {% endfor %}
+                        <li class="list-group-item">An item</li>
+                        <li class="list-group-item">A second item</li>
+                        <li class="list-group-item">A third item</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
             </div>
+            {#-----------------------#}
 
 
-
-
-
-            {#-----------------------------#}
-
-
-
-
-{#-----------------------------#}
         </div>
     </div>
 {% endblock %}

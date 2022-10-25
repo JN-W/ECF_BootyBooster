@@ -97,7 +97,7 @@ class StructureController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('partner/app_partner_home');
+            return $this->redirectToRoute('app_partner_home');
         }
 
         return $this->render('structure/structure_maker.html.twig', [

@@ -1,0 +1,37 @@
+/*COLOR GRAPHIC PALLET*/
+a {
+    /*Violet*/
+    /*color: #52006A;*/
+    /*color: rgb(82,0,106);*/
+
+    /*Rose*/
+    /*color: #CD113B;*/
+    /*color: rgb(205,17,59);*/
+
+    /*Orange*/
+    /*color: #FF7600;*/
+    /*color: rgb(205,118,0);*/
+
+    /*Jaune*/
+    /*color: #FFA900;*/
+    /*color: rgb(205,169,0);*/
+}
+
+
+body{
+    font-family: 'Fredoka', sans-serif;
+    /*font-family: 'Fredoka One', cursive;*/
+}
+
+
+a {
+    text-decoration: none;
+    color: #52006A;
+
+}
+
+a:hover{
+    color:#FFA900;
+    cursor: pointer;
+    background-color: #52006A;
+}
