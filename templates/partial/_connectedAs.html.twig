@@ -1,0 +1,5 @@
+{% if app.user %}
+    <div class="row text-center bg-pink-reverse ">
+        <p>Vous êtes connecté en tant que {{ app.user.email }}</p>
+    </div>
+{% endif %}

@@ -4,10 +4,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
         <title>{% block title %}Welcome!{% endblock %}</title>
 
-        {# Apparement la ligne suivante empêche d'avoir une erreur 404 dans les log pour un favicon pas trouvé #}
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {# Icone in title #}
+{#        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">#}
+        <link rel="icon" href="{{ asset('ressource/favicon-16x16.png') }}">
 
 
         {{ include('partial/_css.html.twig')}}
@@ -19,6 +21,9 @@
         {{ include('partial/_header.html.twig')}}
 
         {% block body %}{% endblock %}
+
+
+        {{ include('partial/_connectedAs.html.twig')}}
 
         {{ include('partial/_partnerSearcherModal.html.twig') }}
         {{ include('partial/_js.html.twig')}}

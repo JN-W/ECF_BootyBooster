@@ -31,5 +31,8 @@ jQuery(document).ready(() => {
         $("#deleteConfirmModal").modal("hide");
     });
 
+
+
+
 // Fermeture jquery
 })

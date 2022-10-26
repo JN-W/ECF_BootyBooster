@@ -1,19 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LoginController!{% endblock %}
+{% block title %}
+    Identifiez vous
+{% endblock %}
 
 {% block body %}
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+    <div class="row">
+            <div class="my-3 p-3 my-5 p-3 col-6 offset-3  ">
+                <h1> Tout commence par une connection </h1>
+            </div>
+    </div>
 
-    <form action="{{ path('app_login') }}" method="post">
-        <label for="username">Email:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}"/>
+    <div class="row justify-content-center ">
+{#    <div class="form-container row form-row">#}
+        {% if error %}
+        <div class="row">
+            <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3 register-error text-bg-danger ">
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password"/>
+                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            </div>
+        </div>
+        {% endif %}
 
-        <button type="submit">login</button>
-    </form>
+        <form action="{{ path('app_login') }}" method="post">
+            <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+                <label for="username" class="label-login">Email :</label>
+                <input type="text" id="username" name="_username" value="" class="form-control form-control-lg"/>
+            </div>
+            <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+                <label for="password" class="label-login">Password :</label>
+                <input type="password" id="password" name="_password" class="form-control form-control-lg"/>
+            </div>
+{#            <div class="my-5 p-3 col-md-6 offset-md-3 col-lg-4 offset-lg-4" >#}
+{#            <div class="my-5 p-3 col-6 offset-3 " >#}
+{#                <button type="submit" class=" btn-lg btn-submit">Go ! Je me connecte !</button>#}
+{#            </div>#}
+
+{#            test button neon#}
+            <div class="my-5 p-3 col-6 offset-3 " >
+
+                <button  id="neon" type="submit">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Let's go !
+                </button>
+            </div>
+
+
+{#            end test button neon#}
+
+        </form>
+    </div>
 {% endblock %}
