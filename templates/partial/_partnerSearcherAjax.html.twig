@@ -21,10 +21,9 @@
                             $('.search-result').remove();
                             if (data !== "")
                             {
-                                // TO DO : ne pas lancer la requête AJAX pour l'appui de touches type MAJ ou CTRL
-
                                 for (let i = 0; i < data.length; i++) {
                                     let current = JSON.parse(data[i]);
+                                    console.log(JSON.parse(data[i]))
                                     $('#search-partner-result').append(`<a class="search-result list-group-item list-group-item-action" href="#" >${current['name']}</a>`);
                                 }
                             }
@@ -46,7 +45,7 @@
             $('.search-result').remove();
         })
 
-        // Code à essayer de la doc bootstrap our le focus
+        // Code à essayer de la doc bootstrap pour le focus
         // $('#myModal').on('shown.bs.modal', function () {
         //     $('#myInput').trigger('focus')
         // })

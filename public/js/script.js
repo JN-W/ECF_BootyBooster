@@ -15,7 +15,7 @@ jQuery(document).ready(() => {
     }
 
 
-    // Modal de confirmation
+    // Modal de confirmation de suppression
     // var theHref;
     $('a.btn-delete').click(function(e) {
         e.preventDefault();

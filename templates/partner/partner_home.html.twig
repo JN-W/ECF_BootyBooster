@@ -10,13 +10,13 @@
 
         {# Therefore the following must be in a col also #}
 
-        <div class="col">
+        <div class="col mx-lg-5 mx-md-3"> {# Les offset servent à éviter le menu fixed > sm ? A retraviller offset-sm-3 offset-xl-2 #}
             <div class="row text-center">
                 <h1>Liste des partenaires</h1>
             </div>
             {#-----------------------------#}
             <div class="row">
-                <table class="table .table-hover">
+                <table class="table table-hover table-responsive table-sm">
                     <thead>
                     <tr>
                         {#                        <th scope="col">Partner</th>#}
@@ -44,11 +44,12 @@
                                     {# <label class="form-check-label" for="flexSwitchCheckDefault">Activer / Désactiver </label>#}
                                 </div>
                             </td>
-                                <td>
-                                    <a href="{{path('app_partner_update', {'id': partner.id})}}" class="btn btn-warning m-md-2"><i class="bi bi-pen"></i></a>
-{#                                    <a href="{{path('app_partner_delete', {'id': partner.id})}}" class="btn btn-danger m-md-2"><i class="bi bi-trash3"></i></a>#}
+                                <td >
+                                    <a href="{{path('app_partner_update', {'id': partner.id})}}" class="btn btn-warning m-md-2 btn-update"><i class="bi bi-pen"></i></a>
                                     <a href="{{path('app_partner_delete', {'id': partner.id})}}" class="btn btn-danger m-md-2 btn-delete"><i class="bi bi-trash3"></i></a>
-{#                                    <a href="#" class="btn btn-danger m-md-2 btn-delete" data-id="{{ partner.id }}" id="{{ partner.id }}" ><i class="bi bi-trash3"></i></a>#}
+                                    <a href="{{path('app_partner_detail', {'id': partner.id})}}" class="btn btn-info m-md-2 btn-consult"><i class="bi bi-eye"></i></a>
+
+
                                 </td>
                             {% endif %}
                             <td>{{ partner.description }}</td>

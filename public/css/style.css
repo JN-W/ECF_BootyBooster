@@ -35,9 +35,6 @@ h1{
     /*background-color: rgba(205,17,59,0.5);*/
     background: rgb(205,17,59);
     background: linear-gradient(to top, rgba(205,17,59,0.7931547619047619) 14%, rgba(255,255,255,1) 78%);
-    position: fixed;
-    bottom: 0px;
-    width: 100vw;
 }
 
 .logo{
@@ -104,6 +101,23 @@ h1{
 /*    font-family: consolas;*/
 /*}*/
 
+.btn-search{
+    background-color: #fff;
+    border: solid 1px #52006A;
+    color: #52006A;
+
+}
+
+button.btn.btn-search:hover
+{
+    /*color: rgb(239, 192, 203);*/
+    /*color: #52006A;*/
+
+    background-color: #fff;
+    box-shadow: 0 0 10px #52006A, 0 0 40px #52006A, 0 0 80px #52006A;
+    /*border-radius: 3px;*/
+}
+
 #neon {
     position: relative;
     display: inline-block;
@@ -123,7 +137,9 @@ h1{
 
 
 
-#neon:hover {
+
+#neon:hover
+{
     /*color: rgb(239, 192, 203);*/
     /*color: #52006A;*/
     color: #CD113B;
@@ -134,13 +150,15 @@ h1{
     transition-delay: 1s;
 }
 
-#neon:hover {
+#neon:hover
+{
     border-radius: 3px;
     /*color: #CD113B;*/
     transition-delay: 1.3s;
 }
 
-#neon span {
+#neon span
+{
     position: absolute;
     display: block;
 }
@@ -148,7 +166,8 @@ h1{
 
 
 
-#neon span:nth-child(1) {
+#neon span:nth-child(1)
+{
     top: 0;
     left: -100%;
     width: 100%;
@@ -158,13 +177,15 @@ h1{
 
 
 
-#neon:hover span:nth-child(1) {
+#neon:hover span:nth-child(1)
+{
     left: 100%;
     transition: 1s;
 }
 
 
-#neon span:nth-child(3) {
+#neon span:nth-child(3)
+{
     bottom: 0;
     right: -100%;
     width: 100%;
@@ -172,7 +193,8 @@ h1{
     background: linear-gradient(270deg, transparent, #CD113B);
 }
 
-#neon:hover span:nth-child(3) {
+#neon:hover span:nth-child(3)
+{
     right: 100%;
     transition: 1s;
     transition-delay: 0.5s;
@@ -180,7 +202,8 @@ h1{
 
 
 
-#neon span:nth-child(2) {
+#neon span:nth-child(2)
+{
     top: -100%;
     right: 0;
     width: 2px;
@@ -188,7 +211,8 @@ h1{
     background: linear-gradient(180deg, transparent, #CD113B);
 }
 
-#neon:hover span:nth-child(2) {
+#neon:hover span:nth-child(2)
+{
     top: 100%;
     transition: 1s;
     transition-delay: 0.25s;
@@ -196,7 +220,8 @@ h1{
 
 
 
-#neon span:nth-child(4) {
+#neon span:nth-child(4)
+{
     bottom: -100%;
     left: 0;
     width: 2px;
@@ -204,7 +229,8 @@ h1{
     background: linear-gradient(360deg, transparent, #CD113B);
 }
 
-#neon:hover span:nth-child(4) {
+#neon:hover span:nth-child(4)
+{
     bottom: 100%;
     transition: 1s;
     transition-delay: 0.75s;
@@ -217,6 +243,16 @@ h1{
 
 
 /*Menu style overriding bootstrap */
+
+/*A retravailler pour le responsive*/
+
+/*@media screen and (min-width: 575px) {*/
+/*    .accordion{*/
+/*        position: fixed;*/
+/*        top: 20%;*/
+/*    }*/
+/*}*/
+
 
 .accordion-button:focus {
     z-index: 3;
@@ -235,7 +271,16 @@ a {
 }
 
 a:hover{
-    color:#FFA900;
+    color:#CD113B;
     cursor: pointer;
-    background-color: #52006A;
+    /*background-color: #52006A;*/
+}
+
+/*Override bootstrap table design*/
+.table-hover{
+    /*background-color: #52006A;*/
+}
+
+li.list-group-item{
+    background-color: transparent;
 }
