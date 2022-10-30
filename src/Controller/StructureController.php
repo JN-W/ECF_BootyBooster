@@ -4,15 +4,17 @@ namespace App\Controller;
 
 use App\Entity\Partner;
 use App\Entity\Structure;
+use App\Entity\User;
 use App\Form\PartnerType;
+use App\Form\StructureCreationFromUserType;
 use App\Form\StructureCreationType;
 use App\Form\StructureDataUpdateType;
 use App\Form\StructureServiceUpdateType;
 use App\Form\StructureType;
-use App\Form\StructureUpdateType;
 use App\Repository\StructureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -60,9 +62,9 @@ class StructureController extends AbstractController
 
 
 
-    // STEP 1 of structure creation : partner choice
+    // STEP 1 of structure creation WITHOUT EXISTING USER : partner choice
     #[Route('/structure/creation/partner_selection', name: 'app_structure_creation_partner_selection')]
-    public function structureMakerTestStepPartner(ManagerRegistry $doctrine): Response
+    public function structureMakerWithoutUserCreationStepPartner(ManagerRegistry $doctrine): Response
     {
         // Fetch all partners
         $repository = $doctrine->getRepository(Partner::class);
@@ -81,10 +83,10 @@ class StructureController extends AbstractController
         ]);
     }
 
-        // STEP 2 of structure creation : structure building
+        // STEP 2 of structure creation WITHOUT EXISTING USER : structure building
         #[Route('/structure/creation/{id}/structure_data', name: 'app_structure_creation_structure_data')]
         #[ParamConverter('partner', class: 'SensioBlogBundle:Partner')]
-        public function structureMakerStepStructure(Request $request, Partner $partner, EntityManagerInterface $entityManager): Response
+        public function structureMakerWithoutUserCreationStepStructure(Request $request, Partner $partner, EntityManagerInterface $entityManager): Response
     {
         //Store partner id for redirection
         $idPartner = $partner->getId();
@@ -126,6 +128,77 @@ class StructureController extends AbstractController
             'partner' => $partner
         ]);
     }
+
+    // STEP 1 of structure creation WITH NEW USER : partner choice
+    #[Route('/structure/creation/partner_selection/{id}', name: 'app_structure_creation_partner_selection_with_user')]
+    public function structureMakerWithUserCreationStepPartner(User $user, ManagerRegistry $doctrine): Response
+    {
+        // Fetch all partners
+        $repository = $doctrine->getRepository(Partner::class);
+        $result = $repository->findAllOrderedByName();
+
+        // Hydrate each partner with its structure and service
+        // Could be optimized do to everything in one query to database instead of 3
+        foreach ($result as $partner) {
+            $partner->getService();
+            $partner->getStructures();
+        }
+
+        return $this->render('structure/structure_maker_partner_selection_with_user.html.twig', [
+            'partners' => $result,
+            'user' => $user
+        ]);
+    }
+
+    // STEP 2 of structure creation WITH NEW USER: structure building
+    #[Route('/structure/creation/{id_partner}/structure_data/{id_user}', name: 'app_structure_creation_structure_data_with_user')]
+    #[Entity('partner', options: ['id' => 'id_partner'])]
+    #[Entity('user', options: ['id' => 'id_user'])]
+    public function structureMakerWithUserCreationStepStructure(Request $request, Partner $partner,User $user , EntityManagerInterface $entityManager): Response
+    {
+        //Store partner id for redirection
+        $idPartner = $partner->getId();
+
+        // Get chosen partner service to apply to new structure
+        $partner_service = $partner->getService();
+
+        // Build new structure
+        $structure = new Structure();
+        // Define partner chosen
+        $structure->setPartner($partner);
+        $structure->setUser($user);
+        // Add chosen partner services to structure
+        foreach($partner_service as $service)
+        {
+            $structure->addService($service);
+        }
+
+        // Form for remaining needed input
+        $form = $this->createForm(StructureCreationFromUserType::class, $structure);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $currentRole = $user->getRoles();
+            if(!in_array( "ROLE_STRUCTURE", $currentRole, $strict = false))
+            {
+                $currentRole[] = "ROLE_STRUCTURE";
+            }
+            $user->setRoles($currentRole);
+            $entityManager->persist($structure);
+            $entityManager->flush();
+            // do anything else you need here, like send an email
+
+            return $this->redirectToRoute('app_partner_detail', ['id' => $idPartner]);
+        }
+
+        return $this->render('structure/structure_maker_from_user.html.twig', [
+            'structureCreationFromUserForm' => $form->createView(),
+            'partner' => $partner,
+            'user' => $user
+        ]);
+    }
+
 
     #[Route('/structure/detail/{id}', name: 'app_structure_detail')]
     public function displayStructure(Structure $structure, ManagerRegistry $doctrine): Response

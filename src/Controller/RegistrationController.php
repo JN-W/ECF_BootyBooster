@@ -56,4 +56,85 @@ class RegistrationController extends AbstractController
             'registrationForm' => $form->createView(),
         ]);
     }
+
+    #[Route('/register/plus_partner', name: 'app_register_plus_partner')]
+    public function registerAndCreatePartner( MailerInterface $mailer, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    {
+        $user = new User();
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // encode the plain password
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $idUser = $user->getId();
+            // do anything else you need here, like send an email
+            $email = (new TemplatedEmail())
+                ->from(new Address('alienmailer@exemple.com','Booty coach'))
+                ->to(new Address($user->getEmail(), 'New player'))
+                -> subject('En route vers le succès')
+                ->htmlTemplate('mail/welcome.html.twig')
+                ->context([
+                    'user' => $user
+                ]);
+
+            $mailer->send($email);
+
+            return $this->redirectToRoute('app_partner_creation_from_user', ['id' => $idUser]);
+        }
+
+        return $this->render('registration/register.html.twig', [
+            'registrationForm' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/register/plus_structure', name: 'app_register_plus_structure')]
+    public function registerAndCreateStructure( MailerInterface $mailer, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    {
+        $user = new User();
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // encode the plain password
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $idUser = $user->getId();
+            // do anything else you need here, like send an email
+            $email = (new TemplatedEmail())
+                ->from(new Address('alienmailer@exemple.com','Booty coach'))
+                ->to(new Address($user->getEmail(), 'New player'))
+                -> subject('En route vers le succès')
+                ->htmlTemplate('mail/welcome.html.twig')
+                ->context([
+                    'user' => $user
+                ]);
+
+            $mailer->send($email);
+
+            return $this->redirectToRoute('app_structure_creation_partner_selection_with_user', ['id' => $idUser]);
+        }
+
+        return $this->render('registration/register.html.twig', [
+            'registrationForm' => $form->createView(),
+        ]);
+    }
+
 }

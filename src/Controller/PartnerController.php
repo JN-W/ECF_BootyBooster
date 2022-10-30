@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Partner;
 use App\Entity\Service;
 use App\Entity\Structure;
+use App\Entity\User;
 use App\Form\PartnerDataUpdateType;
+use App\Form\PartnerFromUserType;
 use App\Form\PartnerServiceUpdateType;
 use App\Form\PartnerType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -197,6 +199,36 @@ class PartnerController extends AbstractController
         return $this->render('partner/partner_data_update.html.twig', [
             'partnerDataUpdateForm' => $form->createView(),
             'partner' => $partner
+        ]);
+    }
+
+    #[Route('/partner/creation/{id}', name: 'app_partner_creation_from_user')]
+    public function partnerMakerFromUser(User $user,Request $request,  EntityManagerInterface $entityManager): Response
+    {
+        $partner = new Partner();
+        $partner->setUser($user);
+        $form = $this->createForm(PartnerFromUserType::class, $partner);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $currentRole = $user->getRoles();
+            if(!in_array( "ROLE_PARTNER", $currentRole, $strict = false))
+            {
+                $currentRole[] = "ROLE_PARTNER";
+            }
+            $user->setRoles($currentRole);
+            $entityManager->persist($partner);
+            $entityManager->flush();
+            // do anything else you need here, like send an email
+
+            $idPartner = $partner->getId();
+            return $this->redirectToRoute('app_partner_detail', ['id'=>$idPartner]);
+        }
+
+        return $this->render('partner/partner_maker_from_user.html.twig', [
+            'partnerCreationFromUserForm' => $form->createView(),
+            'user' => $user
         ]);
     }
 
