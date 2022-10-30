@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edition des services globaux{% endblock %}
+
+{% block body %}
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        <h1>Edition des services de {{ partner.name }}</h1>
+    </div>
+
+    {{ form_start(partnerServiceUpdateForm) }}
+
+
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        {{ form_label(partnerServiceUpdateForm.service, 'Services globaux souscrits par ce partenaire pour ses structures', {'label_attr': {'class': 'my-label'}}) }}
+        {{ form_widget(partnerServiceUpdateForm.service, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(partnerServiceUpdateForm.service) }}
+        {{ form_help(partnerServiceUpdateForm.service) }}
+    </div>
+
+
+    <div class="my-5 p-3 col-6 offset-3 " >
+        <button type="submit" class="btn btn-submit">Mettre à jour les services du partenaire</button>
+    </div>
+
+
+    {{ form_rest(partnerServiceUpdateForm) }}
+
+    {{ form_end(partnerServiceUpdateForm) }}
+
+    {#---------return boutons-------------#}
+    {{ include('partial/_return_to_partner.html.twig') }}
+    {{ include('partial/_return_to_annuaire.html.twig') }}
+    {#-----------------------------#}
+
+
+
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block body %}
+
+    <div class=" row ">
+        {# menuCommun is the left col in display #}
+        {{ include('partial/_menuCommun.html.twig') }}
+
+        {# Therefore the following must be in a col also #}
+
+        <div class="col">
+
+            <div class="row text-center">
+                <h1>Tableau de bord de la structure : {{ structure.address }}</h1>
+
+            </div>
+
+            {#---------------Structure data--------------#}
+            <div class="row">
+                <table class="table table-hover table-responsive table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                {% if app.user and is_granted('ROLE_FRANCHISE')  %}
+                                    <a href="{{ path('app_structure_data_update', {'id' : structure.id})}}" class="m-md-2 "><i class="bi bi-pen"></i></a>
+                                {% endif %}
+                                Informations sur cette structure
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                    <tr>
+                        <th scope="row">
+                            Adresse
+                        </th>
+                        <th >
+                            {{ structure.address }}
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">
+                            Statut
+                        </th>
+                        <th>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="SwitchStructureDetail" {{ (structure.isActive) ? 'checked' : '' }} data-id="{{ structure.id }}">
+                                {#<label class="form-check-label" for="SwitchPartnerDetail">Désactivé / Actif </label>#}
+                            </div>
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">
+                            Structure du partenaire
+                        </th>
+                        <th >
+                            {{ structure.partner }}
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">
+                            Compte utilisateur associé
+                        </th>
+                        <th >
+                            {{ structure.user }}
+                        </th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            {#-----------------------------#}
+
+
+
+            {#---------------Structure service list--------------#}
+            <div class="row">
+                <table class="table table-hover table-responsive table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                {% if app.user and is_granted('ROLE_FRANCHISE')  %}
+                                    <a href="{{ path('app_structure_service_update', {'id' : structure.id})}}" class="m-md-2 "><i class="bi bi-pen"></i></a>
+                                {% endif %}
+                                Services de la structure
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="table-group-divider">
+                    {%  for key, service in structure.service %}
+                        <tr>
+                            <th scope="row">
+                                {{ structure.service | slice(key, 1)| join(', ') }}
+                            </th>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {#-----------------------------#}
+
+            {#---------return boutons-------------#}
+            {{ include('partial/_return_to_partner.html.twig') }}
+            {{ include('partial/_return_to_annuaire.html.twig') }}
+            {#-----------------------------#}
+
+        </div>
+    </div>
+{% endblock %}

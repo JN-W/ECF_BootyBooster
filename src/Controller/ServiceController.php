@@ -37,7 +37,7 @@ class ServiceController extends AbstractController
         ]);
     }
     #[Route('/service/liste', name: 'app_service_liste')]
-    public function partnerHome(ManagerRegistry $doctrine): Response
+    public function displayServices(ManagerRegistry $doctrine): Response
     {
         // Fetch all services
         $repository = $doctrine->getRepository(Service::class);

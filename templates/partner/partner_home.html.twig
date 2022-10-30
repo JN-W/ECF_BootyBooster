@@ -19,7 +19,6 @@
                 <table class="table table-hover table-responsive table-sm">
                     <thead>
                     <tr>
-                        {#                        <th scope="col">Partner</th>#}
                         <th scope="col">Nom</th>
                         {% if app.user and is_granted('ROLE_FRANCHISE')  %}
                         <th scope="col">Statut</th>
@@ -35,18 +34,22 @@
                     {% for partner in partners %}
 
                         <tr>
-                            <th scope="row">{{ partner.name }}</th>
+                            <th scope="row">
+                                {{ partner.name }}<br>
+                                {% if app.user and is_granted('ROLE_FRANCHISE')  %}
+                                <a href="{{path('app_partner_detail', {'id': partner.id})}}" class="btn btn-info m-md-2 btn-consult"><i class="bi bi-eye"></i>/<i class="bi bi-pen"></i></a><br>
+                                {% endif %}
+                            </th>
                             {% if app.user and is_granted('ROLE_FRANCHISE')  %}
                                 <td>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" {{ (partner.isActive) ? 'checked' : '' }} data-id="{{ partner.id }}">
-                                    {# <label class="form-check-label" for="flexSwitchCheckDefault">Activer / Désactiver </label>#}
-                                </div>
-                            </td>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" {{ (partner.isActive) ? 'checked' : '' }} data-id="{{ partner.id }}">
+                                        {# <label class="form-check-label" for="flexSwitchCheckDefault">Activer / Désactiver </label>#}
+                                    </div>
+                                </td>
                                 <td >
-                                    <a href="{{path('app_partner_update', {'id': partner.id})}}" class="btn btn-warning m-md-2 btn-update"><i class="bi bi-pen"></i></a><br>
+{#                                    <a href="{{path('app_partner_update', {'id': partner.id})}}" class="btn btn-warning m-md-2 btn-update"><i class="bi bi-pen"></i></a><br>#}
                                     <a href="{{path('app_partner_delete', {'id': partner.id})}}" class="btn btn-danger m-md-2 btn-delete"><i class="bi bi-trash3"></i></a><br>
-                                    <a href="{{path('app_partner_detail', {'id': partner.id})}}" class="btn btn-info m-md-2 btn-consult"><i class="bi bi-eye"></i></a><br>
 
 
                                 </td>

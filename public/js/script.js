@@ -1,7 +1,7 @@
 //Ouverture jquery
 jQuery(document).ready(() => {
 
-// Activation & Désactivation via les switch EN SYNTAXE JQUERY
+//     Activate & Deactivate partner using switch in jquery syntax
     window.onload = () => {
         let activationSwitches = $("[type=checkbox]")
         for (let activationSwitch of activationSwitches ){
@@ -14,6 +14,19 @@ jQuery(document).ready(() => {
         }
     }
 
+    //     Activate & Deactivate structure using switch in jquery syntax
+    // Controller si ça applique les 2 activation.switch en même temps vu qu'on ecoute tous les switch de type checkbox
+    window.onload = () => {
+        let activationSwitches = $("[type=checkbox]")
+        for (let activationSwitch of activationSwitches ){
+            $(activationSwitch).click( function(){
+                $.ajax({
+                    method: "GET",
+                    url: `/structure/activation/${this.dataset.id}`
+                })
+            })
+        }
+    }
 
     // Modal de confirmation de suppression
     // var theHref;

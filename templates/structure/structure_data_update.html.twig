@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edition d'une structure {% endblock %}
+
+{% block body %}
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        <h1>Edition de la structure {{ structure }}</h1>
+    </div>
+
+    {{ form_start(structureDataUpdateForm) }}
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        {{ form_label(structureDataUpdateForm.address, 'Modifier l\'adresse de la structure ?', {'label_attr': {'class': 'my-label'}}) }}
+        {{ form_widget(structureDataUpdateForm.address, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(structureDataUpdateForm.address) }}
+        {{ form_help(structureDataUpdateForm.address) }}
+    </div>
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        {{ form_label(structureDataUpdateForm.partner, 'Changer de partenaire ?', {'label_attr': {'class': 'my-label'}}) }}
+        {{ form_widget(structureDataUpdateForm.partner, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(structureDataUpdateForm.partner) }}
+        {{ form_help(structureDataUpdateForm.partner) }}
+    </div>
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        {{ form_label(structureDataUpdateForm.user, 'Changer d\utilisateur ?', {'label_attr': {'class': 'my-label'}}) }}
+        {{ form_widget(structureDataUpdateForm.user, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(structureDataUpdateForm.user) }}
+        {{ form_help(structureDataUpdateForm.user) }}
+    </div>
+
+
+
+    <div class="my-5 p-3 col-6 offset-3 " >
+        <button type="submit" class="btn btn-submit">Enregistrer les modifications</button>
+    </div>
+
+
+    {{ form_rest(structureDataUpdateForm) }}
+
+    {{ form_end(structureDataUpdateForm) }}
+
+    {#---------return boutons-------------#}
+    {{ include('partial/_return_to_structure.html.twig') }}
+    {{ include('partial/_return_to_partner.html.twig') }}
+    {{ include('partial/_return_to_annuaire.html.twig') }}
+    {#-----------------------------#}
+
+
+{% endblock %}

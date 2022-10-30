@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Partner;
+use App\Entity\Service;
 use App\Entity\Structure;
+use App\Form\PartnerDataUpdateType;
+use App\Form\PartnerServiceUpdateType;
 use App\Form\PartnerType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -12,6 +15,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+//use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 
 class PartnerController extends AbstractController
@@ -35,7 +40,7 @@ class PartnerController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_partner_home');
         }
 
         return $this->render('partner/partner_maker.html.twig', [
@@ -84,6 +89,7 @@ class PartnerController extends AbstractController
         ]);
     }
 
+//    NOTA : error in method name
     #[Route('/partner/delete/{id}', name: 'app_partner_delete')]
     public function deleteNews(Partner $partner, ManagerRegistry $doctrine): Response
     {
@@ -129,38 +135,70 @@ class PartnerController extends AbstractController
             // TO DO : affiché l'état actif/inactif
         }
 
-
         // Envoi de la réponse en JSON
         return new JsonResponse($JSON_formated_partner);
     }
 
     #[Route('/partner/detail/{id}', name: 'app_partner_detail')]
+//    #[ParamConverter('partner', class: 'SensioBlogBundle:Partner')]
+
     public function displayPartner(Partner $partner, ManagerRegistry $doctrine): Response
     {
+        $serviceCounter = $partner->getService()->count();
+        $structureCounter = $partner->getStructures()->count();
         // Get all structures from this partner and their services
-        $partner_service = $partner->getService();
-        $partner_structure = $partner->getStructures();
-        $partnerId = $partner->getId();
-        dump($partner);
-        dump($partner_service);
-        dump($partner_structure);
-        $result = [];
-        foreach($partner_structure as $structure){
-            $result[$structure->getAddress()] = $structure->getService()->getValues();
-//            dump($result);
+        $partner->getId();
+        $partner->getService();
+        $partner->getStructures();
 
-        }
-
-//        // Count how many structure use each service
-//        $structureRepository = $doctrine->getRepository(Structure::class);
-//        $count = $structureRepository->countStructureWithThisService($partnerId);
-//        dump($count);
-
-        return $this->render('partner/partner_test.html.twig', [
+        return $this->render('partner/partner_detail.html.twig', [
             'partner' => $partner,
-            'result' => $result,
-            'globalService' => $partner_service,
-//            'count' => $count
+            'serviceCounter' => $serviceCounter,
+            'structureCounter' => $structureCounter
         ]);
     }
+
+    #[Route('/partner/service/update/{id}', name: 'app_partner_service_update')]
+    public function partnerServiceUpdate(Partner $partner,Request $request, ManagerRegistry $doctrine): Response
+    {
+        $idPartner = $partner->getId();
+        $form = $this->createForm(PartnerServiceUpdateType::class, $partner);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager = $doctrine->getManager();
+            $entityManager->flush();
+            return $this->redirectToRoute('app_partner_detail', ['id'=>$idPartner]);
+        }
+
+        return $this->render('partner/partner_service_update.html.twig', [
+            'partnerServiceUpdateForm' => $form->createView(),
+            'partner' => $partner
+        ]);
+    }
+
+    #[Route('/partner/data/update/{id}', name: 'app_partner_data_update')]
+    public function partnerDataUpdate(Partner $partner,Request $request, ManagerRegistry $doctrine): Response
+    {
+        $idPartner = $partner->getId();
+        $form = $this->createForm(PartnerDataUpdateType::class, $partner);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager = $doctrine->getManager();
+            $entityManager->flush();
+            return $this->redirectToRoute('app_partner_detail', ['id'=>$idPartner]);
+        }
+
+
+
+        return $this->render('partner/partner_data_update.html.twig', [
+            'partnerDataUpdateForm' => $form->createView(),
+            'partner' => $partner
+        ]);
+    }
+
+
 }
