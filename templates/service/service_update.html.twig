@@ -10,7 +10,6 @@
     {{ form_start(serviceUpdateForm) }}
 
     <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-        {#{{ form_row(serviceCreationForm.title) }}#}
         {{ form_label(serviceUpdateForm.title, 'Nouvel intitulé du service', {'label_attr': {'class': 'my-label'}}) }}
         {{ form_widget(serviceUpdateForm.title, {'attr': {'class': 'form-control'}}) }}
         {{ form_errors(serviceUpdateForm.title) }}
