@@ -231,6 +231,8 @@ class StructureController extends AbstractController
     public function structureServiceUpdate(Structure $structure,Request $request, ManagerRegistry $doctrine): Response
     {
         $partner = $structure->getPartner();
+        $partner->getService();
+        $service_from_partner = $partner->getService()->getValues();
         $idStructure = $structure->getId();
         $form = $this->createForm(StructureServiceUpdateType::class, $structure);
         $form->handleRequest($request);
@@ -245,7 +247,8 @@ class StructureController extends AbstractController
         return $this->render('structure/structure_service_update.html.twig', [
             'structureServiceUpdateForm' => $form->createView(),
             'structure' => $structure,
-            'partner' => $partner
+            'partner' => $partner,
+            'service_from_partner' => $service_from_partner
         ]);
     }
 
