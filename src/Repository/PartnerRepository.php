@@ -44,6 +44,8 @@ class PartnerRepository extends ServiceEntityRepository
         return $this->findBy([],['name'=>'asc']);
     }
 
+//    Use query builder that is unsafe against SQL injection
+//    To modify so it is a prepared statement query
     public function findByWord($keyword):array
     {
         $result=  $this

@@ -8,15 +8,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/home', name: 'app_home')]
+    #[Route('/', name: 'app_landing')]
     public function index(): Response
     {
-        return $this->render('home/home.html.twig');
+        return $this->redirectToRoute('app_login');
     }
 
-    #[Route('/', name: 'app_test')]
+    #[Route('/home', name: 'app_home')]
     public function test(): Response
     {
-        return $this->redirectToRoute('app_partner_home');
+        return $this->render('home/home.html.twig');
     }
 }

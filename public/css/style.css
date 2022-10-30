@@ -68,11 +68,17 @@ h1{
     color: #fff;
 }
 
+.my-label{
+    font-size: 1em;
+    color: #52006A;
+}
+
 
 /*START btn submit myself*/
 /*Replace with neon effect button, to see if usefull for other button*/
 .btn-submit{
-    width: 80%;
+    /*width: 80%;*/
+    width: fit-content;
     color: #52006A;
     border-color: #52006A;
     box-shadow: 0 0 0 0.25rem rgba(82, 0, 106, 0.2);
@@ -80,8 +86,7 @@ h1{
 }
 
 .btn-submit:hover{
-    width: 80%;
-    color: #000;
+    color: #CD113B;
     /*border-color: #52006A;*/
     border-color: rgb(205, 17, 59);
     background: rgba(205, 17, 59, 0.2);

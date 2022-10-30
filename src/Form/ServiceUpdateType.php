@@ -2,30 +2,26 @@
 
 namespace App\Form;
 
-use App\Entity\Partner;
+use App\Entity\Service;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-
-class PartnerType extends AbstractType
+class ServiceUpdateType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('is_active')
-            ->add('description')
-            ->add('user')
-            ->add('service')
+            ->add('title')
+//            ->add('structures')
+//            ->add('partners')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Partner::class,
+            'data_class' => Service::class,
         ]);
     }
 }

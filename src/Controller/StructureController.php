@@ -4,8 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Partner;
 use App\Entity\Structure;
+use App\Form\PartnerType;
 use App\Form\StructureCreationType;
 use App\Form\StructureType;
+use App\Form\StructureUpdateType;
+use App\Repository\StructureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -41,6 +44,37 @@ class StructureController extends AbstractController
             'structureCreationForm' => $form->createView(),
         ]);
     }
+
+//    #[Route('/structure/delete/{address}', name: 'app_structure_delete')]
+//    public function deleteNews(StructureRepository $structureRepository, ManagerRegistry $doctrine): Response
+//    {
+//        $structure = $structureRepository->findOneByAddress('address');
+//        $entityManager = $doctrine->getManager();
+//        $entityManager->remove($structure);
+//        $entityManager->flush();
+//        return $this->redirectToRoute('app_partner_home');
+//    }
+//
+//    #[Route('/structure/update/{address}', name: 'app_structure_update')]
+//    public function partnerTest(string $adresse, StructureRepository $structureRepository,Request $request, ManagerRegistry $doctrine): Response
+//    {
+//        dump('$adresse');
+//        $structure = $structureRepository->findOneByAddress('$adresse');
+//        dump($structure);
+//        $form = $this->createForm(StructureUpdateType::class, $structure);
+//        $form->handleRequest($request);
+//
+//        if($form->isSubmitted() && $form->isValid())
+//        {
+//            $entityManager = $doctrine->getManager();
+//            $entityManager->flush();
+//            return $this->redirectToRoute('app_partner_home');
+//        }
+//
+//        return $this->render('structure/structure_modifyer.html.twig', [
+//            'structureCreationForm' => $form->createView(),
+//        ]);
+//    }
 
     // STEP 1 of structure creation : partner choice
     #[Route('/structure/creation/partner_selection', name: 'app_structure_creation_partner_selection')]

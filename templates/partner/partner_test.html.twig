@@ -16,6 +16,7 @@
             </div>
 
             <div class="row">
+                {{ dump(result) }}
                 {#-----------PARTNER STRUCTURES LIST------------#}
                  {%  for  structure, serviceArray in result %}
                 <div class="card" style="width: 18rem;">
@@ -43,8 +44,9 @@
                         {% endfor %}
                     </ul>
                     <div class="card-body">
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
+                        {{ dump(structure) }}
+{#                        <a href="{{path('app_structure_update', {'address': structure})}}" class="btn btn-warning m-md-2 btn-update"><i class="bi bi-pen"></i></a><br>#}
+{#                        <a href="{{path('app_structure_delete', {'address': structure})}}" class="btn btn-danger m-md-2 btn-delete"><i class="bi bi-trash3"></i></a><br>#}
                     </div>
                 </div>
                 {% endfor %}

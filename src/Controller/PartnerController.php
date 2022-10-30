@@ -141,11 +141,13 @@ class PartnerController extends AbstractController
         $partner_service = $partner->getService();
         $partner_structure = $partner->getStructures();
         $partnerId = $partner->getId();
-//        dump($partner_structure);
+        dump($partner);
+        dump($partner_service);
+        dump($partner_structure);
         $result = [];
         foreach($partner_structure as $structure){
             $result[$structure->getAddress()] = $structure->getService()->getValues();
-            dump($result);
+//            dump($result);
 
         }
 

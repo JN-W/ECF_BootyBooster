@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edition d'une structure{% endblock %}
+
+{% block body %}
+<div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+
+<h1>Edition d'une structure</h1>
+</div>
+    {{ form_start(structureCreationForm) }}
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        {{ form_label(structureCreationForm.address, 'Modifier l\'adresse de la structure', {'label_attr': {'class': 'my-label'}}) }}
+        {{ form_widget(structureCreationForm.address, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(structureCreationForm.address) }}
+        {{ form_help(structureCreationForm.address) }}
+    </div>
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        {{ form_label(structureCreationForm.service, 'Modifier les services de la structure', {'label_attr': {'class': 'my-label'}}) }}
+        {{ form_widget(structureCreationForm.service, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(structureCreationForm.service) }}
+        {{ form_help(structureCreationForm.service) }}
+    </div>
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        {{ form_label(structureCreationForm.is_active, 'Cocher pour Activer', {'label_attr': {'class': 'my-label'}}) }}
+        {{ form_widget(structureCreationForm.is_active)}}
+        {{ form_errors(structureCreationForm.is_active) }}
+        {{ form_help(structureCreationForm.is_active) }}
+    </div>
+
+<div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+
+    <button type="submit" class="btn btn-submit">Enregistrer les modifications</button>
+</div>
+
+
+    {{ form_end(structureCreationForm) }}
+{% endblock %}

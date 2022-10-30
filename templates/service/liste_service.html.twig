@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des services{% endblock %}
+
+{% block body %}
+
+    <div class=" row ">
+        {# menuCommun is the left col in display #}
+        {{ include('partial/_menuCommun.html.twig') }}
+
+        {# Therefore the following must be in a col also #}
+
+        <div class="col mx-lg-5 mx-md-3"> {# Les offset servent à éviter le menu fixed > sm ? A retraviller offset-sm-3 offset-xl-2 #}
+            <div class="row text-center">
+                <h1>Liste des services proposés  par Booty Booster</h1>
+            </div>
+            {#-----------------------------#}
+            <div class="row">
+                <table class="table table-hover table-responsive table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col">Intitulé du service</th>
+                        {% if app.user and is_granted('ROLE_FRANCHISE')  %}
+                            <th scope="col">Modifier</th>
+                            <th scope="col">Supprimer</th>
+                        {% endif %}
+                    </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                    {% for service in services %}
+
+                        <tr>
+                            <th scope="row">{{ service.title }}</th>
+                            {% if app.user and is_granted('ROLE_FRANCHISE')  %}
+                                <td >
+                                    <a href="{{path('app_service_update', {'id': service.id})}}" class="btn btn-warning m-md-2 btn-update"><i class="bi bi-pen"></i></a><br>
+                                </td>
+                                <td>
+                                    <a href="{{path('app_service_delete', {'id': service.id})}}" class="btn btn-danger m-md-2 btn-delete"><i class="bi bi-trash3"></i></a><br>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
+
+            {#-----------------------------#}
+        </div>
+    </div>
+
+    {{ include('partial/_deleteConfirmModal.html.twig') }}
+
+{% endblock %}

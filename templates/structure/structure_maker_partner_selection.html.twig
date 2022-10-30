@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Listing partenaires{% endblock %}
+{% block title %}Edition structure 1/2{% endblock %}
 
 {% block body %}
 
@@ -33,7 +33,7 @@
                         <tr>
                             <th scope="row">{{ partner.name }}</th>
                             <td>
-                                <a href="{{path('app_structure_creation_structure_data', {'id': partner.id})}}" class="btn btn-warning m-md-2"><i class="bi bi-pen"></i></a>
+                                <a href="{{path('app_structure_creation_structure_data', {'id': partner.id})}}" class="btn btn-secondary m-md-2"><i class="bi bi-check2-square"></i></a>
                             </td>
                             <td>{{ partner.description }}</td>
                             <td>

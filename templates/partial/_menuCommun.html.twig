@@ -10,13 +10,11 @@
             </h2>
             <div id="collapseZero" class="accordion-collapse collapse " aria-labelledby="headingZero" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <a href=" {{ path('app_login') }} ">Se connecter</a><br>
                     <a href=" {{ path('app_logout') }} ">Se déconnecter</a><br>
                     <a href=" {{ path('app_register') }} ">Créer un nouvel utilisateur</a><br>
                 </div>
             </div>
         </div>
-{#    {% if is_granted('ROLE_FRANCHISE') %}#}
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
@@ -25,9 +23,9 @@
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <a href=" {{ path('app_partner_creation') }} ">Créer un nouveau partenaire</a><br>
-                    <a href=" # ">Modifier un partenaire existant</a><br>
-                    <a href=" # ">Supprimer un partenaire existant</a><br>
+                    <a href=" {{ path('app_partner_creation') }} ">Créer un nouveau partenaire avec un nouvel utilisateur</a><br>
+                    <a href="#">Créer un nouveau partenaire avec un utilisateur existant</a><br>
+
                 </div>
             </div>
         </div>
@@ -39,9 +37,8 @@
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <a href=" {{ path('app_structure_creation') }} ">Créer une nouvelle structure</a><br>
-                    <a href=" # ">Modifier une structure existante</a><br>
-                    <a href=" # ">Supprimer une structure existante</a><br>
+                    <a href=" {{ path('app_structure_creation_partner_selection') }} ">Créer une nouvelle structure avec un nouvel utilisateur</a><br>
+                    <a href="#">Créer une nouvelle structure avec un utilisateur existant</a><br>
                 </div>
             </div>
         </div>
@@ -54,9 +51,9 @@
             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <a href=" {{ path('app_service_creation') }} ">Créer un nouveau service</a><br>
-                    <a href=" # ">Supprimer un service</a><br>
+                    <a href="{{ path('app_service_liste') }}">Liste des services</a><br>
                 </div>
             </div>
         </div>
-        {% endif %}
     </div>
+{% endif %}

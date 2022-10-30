@@ -1,16 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PartnerController!{% endblock %}
+{% block title %}Edition d'un partenaire{% endblock %}
 
 {% block body %}
-    <h1>Création d'un partenaire</h1>
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        <h1>Edition du partenaire</h1>
+    </div>
 
     {{ form_start(partnerCreationForm) }}
-    {{ form_row(partnerCreationForm.name) }}
-    {{ form_row(partnerCreationForm.description) }}
-    {{ form_row(partnerCreationForm.user) }}
-    {{ form_row(partnerCreationForm.service) }}
 
-    <button type="submit" class="btn">Créer ce partenaire</button>
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        {{ form_label(partnerCreationForm.name, 'Nom du partenaire', {'label_attr': {'class': 'my-label'}}) }}
+        {{ form_widget(partnerCreationForm.name, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(partnerCreationForm.name) }}
+        {{ form_help(partnerCreationForm.name) }}
+    </div>
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        {{ form_label(partnerCreationForm.description, 'Présentation du partenaire', {'label_attr': {'class': 'my-label'}}) }}
+        {{ form_widget(partnerCreationForm.description, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(partnerCreationForm.description) }}
+        {{ form_help(partnerCreationForm.description) }}
+    </div>
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        {{ form_label(partnerCreationForm.user, 'A quel utilisateur associer ce partenaire ?', {'label_attr': {'class': 'my-label'}}) }}
+        {{ form_widget(partnerCreationForm.user, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(partnerCreationForm.user) }}
+        {{ form_help(partnerCreationForm.user) }}
+    </div>
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        {{ form_label(partnerCreationForm.service, 'Services globaux souscrits par ce partenaire pour ses structures', {'label_attr': {'class': 'my-label'}}) }}
+        {{ form_widget(partnerCreationForm.service, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(partnerCreationForm.service) }}
+        {{ form_help(partnerCreationForm.service) }}
+    </div>
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        {{ form_label(partnerCreationForm.is_active, 'Cocher si le partenaire est actif', {'label_attr': {'class': 'my-label'}}) }}
+        {{ form_widget(partnerCreationForm.is_active)}}
+        {{ form_errors(partnerCreationForm.is_active) }}
+        {{ form_help(partnerCreationForm.is_active) }}
+    </div>
+
+    <div class="my-5 p-3 col-6 offset-3 " >
+        <button type="submit" class="btn btn-submit">Créer ce partenaire</button>
+    </div>
+
+
+    {{ form_rest(partnerCreationForm) }}
+
     {{ form_end(partnerCreationForm) }}
 {% endblock %}
