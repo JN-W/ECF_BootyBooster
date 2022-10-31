@@ -17,6 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ServiceController extends AbstractController
 {
     #[Route('/service/creation', name: 'app_service_creation')]
+    #[security("is_granted('ROLE_FRANCHISE')")]
     public function serviceMaker(Request $request,  EntityManagerInterface $entityManager): Response
     {
         $service = new Service();
@@ -37,6 +38,7 @@ class ServiceController extends AbstractController
         ]);
     }
     #[Route('/service/liste', name: 'app_service_liste')]
+    #[security("is_granted('ROLE_FRANCHISE')")]
     public function displayServices(ManagerRegistry $doctrine): Response
     {
         // Fetch all services

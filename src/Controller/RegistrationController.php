@@ -19,6 +19,7 @@ use Symfony\Config\Twig\NumberFormatConfig;
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
+    #[security("is_granted('ROLE_FRANCHISE')")]
     public function register( MailerInterface $mailer, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
@@ -39,7 +40,7 @@ class RegistrationController extends AbstractController
 
             // do anything else you need here, like send an email
             $email = (new TemplatedEmail())
-                ->from(new Address('alienmailer@exemple.com','Booty coach'))
+                ->from(new Address('YourBootyCoach@exemple.com','Booty coach'))
                 ->to(new Address($user->getEmail(), 'New player'))
                 -> subject('En route vers le succès')
                 ->htmlTemplate('mail/welcome.html.twig')
@@ -49,7 +50,7 @@ class RegistrationController extends AbstractController
 
             $mailer->send($email);
 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_partner_home');
         }
 
         return $this->render('registration/register.html.twig', [
@@ -58,6 +59,7 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register/plus_partner', name: 'app_register_plus_partner')]
+    #[security("is_granted('ROLE_FRANCHISE')")]
     public function registerAndCreatePartner( MailerInterface $mailer, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
@@ -98,6 +100,7 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register/plus_structure', name: 'app_register_plus_structure')]
+    #[security("is_granted('ROLE_FRANCHISE')")]
     public function registerAndCreateStructure( MailerInterface $mailer, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();

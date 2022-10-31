@@ -12,10 +12,13 @@ use App\Form\PartnerServiceUpdateType;
 use App\Form\PartnerType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 //use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
@@ -24,7 +27,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 class PartnerController extends AbstractController
 {
     #[Route('/partner/creation', name: 'app_partner_creation')]
-    public function partnerMaker(Request $request,  EntityManagerInterface $entityManager): Response
+    #[security("is_granted('ROLE_FRANCHISE')")]
+    public function partnerMaker(MailerInterface $mailer, Request $request,  EntityManagerInterface $entityManager): Response
     {
         $partner = new Partner();
         $form = $this->createForm(PartnerType::class, $partner);
@@ -41,7 +45,16 @@ class PartnerController extends AbstractController
             $entityManager->persist($partner);
             $entityManager->flush();
             // do anything else you need here, like send an email
+            $email = (new TemplatedEmail())
+                ->from(new Address('YourBootyCoach@exemple.com','Booty coach'))
+                ->to(new Address($partner->getUser()->getEmail(), 'New player'))
+                -> subject('Bienvenu à bord partenaire !')
+                ->htmlTemplate('mail/new_partner.html.twig')
+                ->context([
+                    'partner' => $partner
+                ]);
 
+            $mailer->send($email);
             return $this->redirectToRoute('app_partner_home');
         }
 
@@ -74,6 +87,7 @@ class PartnerController extends AbstractController
 
 
     #[Route('/partner/update/{id}', name: 'app_partner_update')]
+    #[security("is_granted('ROLE_FRANCHISE')")]
     public function partnerTest(Partner $partner,Request $request, ManagerRegistry $doctrine): Response
     {
         $form = $this->createForm(PartnerType::class, $partner);
@@ -91,17 +105,28 @@ class PartnerController extends AbstractController
         ]);
     }
 
-//    NOTA : error in method name
     #[Route('/partner/delete/{id}', name: 'app_partner_delete')]
-    public function deleteNews(Partner $partner, ManagerRegistry $doctrine): Response
+    #[security("is_granted('ROLE_FRANCHISE')")]
+    public function deletePartner(MailerInterface $mailer, Partner $partner, ManagerRegistry $doctrine): Response
     {
         $entityManager = $doctrine->getManager();
         $entityManager->remove($partner);
         $entityManager->flush();
+        $email = (new TemplatedEmail())
+            ->from(new Address('YourBootyCoach@exemple.com','Booty coach'))
+            ->to(new Address($partner->getUser()->getEmail(), 'New player'))
+            -> subject('Au revoir partenaire...')
+            ->htmlTemplate('mail/delete.html.twig')
+            ->context([
+                'partner' => $partner
+            ]);
+
+        $mailer->send($email);
         return $this->redirectToRoute('app_partner_home');
     }
 
     #[Route('/partner/activation/{id}', name: 'app_partner_activation')]
+    #[security("is_granted('ROLE_FRANCHISE')")]
     public function partner_activater(Partner $partner, ManagerRegistry $doctrine)
     {
         // Vérification à faire
@@ -142,8 +167,7 @@ class PartnerController extends AbstractController
     }
 
     #[Route('/partner/detail/{id}', name: 'app_partner_detail')]
-//    #[ParamConverter('partner', class: 'SensioBlogBundle:Partner')]
-
+    #[security("is_granted('ROLE_FRANCHISE')")]
     public function displayPartner(Partner $partner, ManagerRegistry $doctrine): Response
     {
         $serviceCounter = $partner->getService()->count();
@@ -161,6 +185,7 @@ class PartnerController extends AbstractController
     }
 
     #[Route('/partner/service/update/{id}', name: 'app_partner_service_update')]
+    #[security("is_granted('ROLE_FRANCHISE')")]
     public function partnerServiceUpdate(Partner $partner,Request $request, ManagerRegistry $doctrine): Response
     {
         $idPartner = $partner->getId();
@@ -181,6 +206,7 @@ class PartnerController extends AbstractController
     }
 
     #[Route('/partner/data/update/{id}', name: 'app_partner_data_update')]
+    #[security("is_granted('ROLE_FRANCHISE')")]
     public function partnerDataUpdate(Partner $partner,Request $request, ManagerRegistry $doctrine): Response
     {
         $idPartner = $partner->getId();
@@ -203,7 +229,8 @@ class PartnerController extends AbstractController
     }
 
     #[Route('/partner/creation/{id}', name: 'app_partner_creation_from_user')]
-    public function partnerMakerFromUser(User $user,Request $request,  EntityManagerInterface $entityManager): Response
+    #[security("is_granted('ROLE_FRANCHISE')")]
+    public function partnerMakerFromUser(MailerInterface $mailer,User $user,Request $request,  EntityManagerInterface $entityManager): Response
     {
         $partner = new Partner();
         $partner->setUser($user);
@@ -221,6 +248,16 @@ class PartnerController extends AbstractController
             $entityManager->persist($partner);
             $entityManager->flush();
             // do anything else you need here, like send an email
+            $email = (new TemplatedEmail())
+                ->from(new Address('YourBootyCoach@exemple.com','Booty coach'))
+                ->to(new Address($partner->getUser()->getEmail(), 'New player'))
+                -> subject('Bienvenu à bord partenaire !')
+                ->htmlTemplate('mail/new_partner.html.twig')
+                ->context([
+                    'partner' => $partner
+                ]);
+
+            $mailer->send($email);
 
             $idPartner = $partner->getId();
             return $this->redirectToRoute('app_partner_detail', ['id'=>$idPartner]);

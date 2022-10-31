@@ -24,6 +24,7 @@ class StructureType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Structure::class,
+            'sanitize_html' => true,
         ]);
     }
 }

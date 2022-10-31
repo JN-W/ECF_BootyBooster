@@ -22,6 +22,7 @@ class ServiceUpdateType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Service::class,
+            'sanitize_html' => true,
         ]);
     }
 }

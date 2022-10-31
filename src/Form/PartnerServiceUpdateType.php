@@ -20,6 +20,7 @@ class PartnerServiceUpdateType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Partner::class,
+            'sanitize_html' => true,
         ]);
     }
 }

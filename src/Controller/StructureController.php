@@ -15,15 +15,19 @@ use App\Repository\StructureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 
 class StructureController extends AbstractController
 {
     #[Route('/structure/creation', name: 'app_structure_creation')]
-    public function structureMaker(Request $request,  EntityManagerInterface $entityManager): Response
+    #[security("is_granted('ROLE_FRANCHISE')")]
+    public function structureMaker(MailerInterface $mailer, Request $request,  EntityManagerInterface $entityManager): Response
     {
         $structure = new Structure();
         $form = $this->createForm(StructureType::class, $structure);
@@ -40,6 +44,16 @@ class StructureController extends AbstractController
             $entityManager->persist($structure);
             $entityManager->flush();
             // do anything else you need here, like send an email
+            $email = (new TemplatedEmail())
+                ->from(new Address('YourBootyCoach@exemple.com','Booty coach'))
+                ->to(new Address($structure->getUser()->getEmail(), 'New player'))
+                -> subject('Chouette ! Une nouvelle structure Booty Booster !')
+                ->htmlTemplate('mail/new_partner.html.twig')
+                ->context([
+                    'structure' => $structure
+                ]);
+
+            $mailer->send($email);
 
             return $this->redirectToRoute('app_home');
         }
@@ -50,12 +64,25 @@ class StructureController extends AbstractController
     }
 
     #[Route('/structure/delete/{id}', name: 'app_structure_delete')]
-    public function structureDelete(Structure $structure, ManagerRegistry $doctrine): Response
+    #[security("is_granted('ROLE_FRANCHISE')")]
+    public function structureDelete(MailerInterface $mailer, Structure $structure, ManagerRegistry $doctrine): Response
     {
         $idPartner = $structure->getPartner()->getId();
         $entityManager = $doctrine->getManager();
         $entityManager->remove($structure);
         $entityManager->flush();
+        $email = (new TemplatedEmail())
+            ->from(new Address('YourBootyCoach@exemple.com','Booty coach'))
+            ->to(new Address($structure->getUser()->getEmail(), 'New player'))
+            -> subject('Au revoir partenaire...')
+            ->htmlTemplate('mail/delete.html.twig')
+            ->context([
+                'structure' => $structure
+            ]);
+
+        $mailer->send($email);
+
+
         return $this->redirectToRoute('app_partner_detail', [ 'id' => $idPartner]);
     }
 
@@ -64,6 +91,7 @@ class StructureController extends AbstractController
 
     // STEP 1 of structure creation WITHOUT EXISTING USER : partner choice
     #[Route('/structure/creation/partner_selection', name: 'app_structure_creation_partner_selection')]
+    #[security("is_granted('ROLE_FRANCHISE')")]
     public function structureMakerWithoutUserCreationStepPartner(ManagerRegistry $doctrine): Response
     {
         // Fetch all partners
@@ -86,7 +114,8 @@ class StructureController extends AbstractController
         // STEP 2 of structure creation WITHOUT EXISTING USER : structure building
         #[Route('/structure/creation/{id}/structure_data', name: 'app_structure_creation_structure_data')]
         #[ParamConverter('partner', class: 'SensioBlogBundle:Partner')]
-        public function structureMakerWithoutUserCreationStepStructure(Request $request, Partner $partner, EntityManagerInterface $entityManager): Response
+        #[security("is_granted('ROLE_FRANCHISE')")]
+        public function structureMakerWithoutUserCreationStepStructure(MailerInterface $mailer, Request $request, Partner $partner, EntityManagerInterface $entityManager): Response
     {
         //Store partner id for redirection
         $idPartner = $partner->getId();
@@ -119,7 +148,16 @@ class StructureController extends AbstractController
             $entityManager->persist($structure);
             $entityManager->flush();
             // do anything else you need here, like send an email
+            $email = (new TemplatedEmail())
+                ->from(new Address('YourBootyCoach@exemple.com','Booty coach'))
+                ->to(new Address($structure->getUser()->getEmail(), 'New player'))
+                -> subject('Chouette ! Une nouvelle structure Booty Booster !')
+                ->htmlTemplate('mail/new_partner.html.twig')
+                ->context([
+                    'structure' => $structure
+                ]);
 
+            $mailer->send($email);
             return $this->redirectToRoute('app_partner_detail', ['id' => $idPartner]);
         }
 
@@ -131,6 +169,7 @@ class StructureController extends AbstractController
 
     // STEP 1 of structure creation WITH NEW USER : partner choice
     #[Route('/structure/creation/partner_selection/{id}', name: 'app_structure_creation_partner_selection_with_user')]
+    #[security("is_granted('ROLE_FRANCHISE')")]
     public function structureMakerWithUserCreationStepPartner(User $user, ManagerRegistry $doctrine): Response
     {
         // Fetch all partners
@@ -154,7 +193,8 @@ class StructureController extends AbstractController
     #[Route('/structure/creation/{id_partner}/structure_data/{id_user}', name: 'app_structure_creation_structure_data_with_user')]
     #[Entity('partner', options: ['id' => 'id_partner'])]
     #[Entity('user', options: ['id' => 'id_user'])]
-    public function structureMakerWithUserCreationStepStructure(Request $request, Partner $partner,User $user , EntityManagerInterface $entityManager): Response
+    #[security("is_granted('ROLE_FRANCHISE')")]
+    public function structureMakerWithUserCreationStepStructure(MailerInterface $mailer, Request $request, Partner $partner,User $user , EntityManagerInterface $entityManager): Response
     {
         //Store partner id for redirection
         $idPartner = $partner->getId();
@@ -188,7 +228,16 @@ class StructureController extends AbstractController
             $entityManager->persist($structure);
             $entityManager->flush();
             // do anything else you need here, like send an email
+            $email = (new TemplatedEmail())
+                ->from(new Address('YourBootyCoach@exemple.com','Booty coach'))
+                ->to(new Address($structure->getUser()->getEmail(), 'New player'))
+                -> subject('Chouette ! Une nouvelle structure Booty Booster !')
+                ->htmlTemplate('mail/new_partner.html.twig')
+                ->context([
+                    'structure' => $structure
+                ]);
 
+            $mailer->send($email);
             return $this->redirectToRoute('app_partner_detail', ['id' => $idPartner]);
         }
 
@@ -201,6 +250,7 @@ class StructureController extends AbstractController
 
 
     #[Route('/structure/detail/{id}', name: 'app_structure_detail')]
+    #[security("is_granted('ROLE_FRANCHISE')")]
     public function displayStructure(Structure $structure, ManagerRegistry $doctrine): Response
     {
         // Get all services and partner from this structure
@@ -216,6 +266,7 @@ class StructureController extends AbstractController
     }
 
     #[Route('/structure/activation/{id}', name: 'app_structure_activation')]
+    #[security("is_granted('ROLE_FRANCHISE')")]
     public function structure_activater(Structure $structure, ManagerRegistry $doctrine)
     {
         // Vérification à faire
@@ -228,6 +279,7 @@ class StructureController extends AbstractController
     }
 
     #[Route('/structure/service/update/{id}', name: 'app_structure_service_update')]
+    #[security("is_granted('ROLE_FRANCHISE')")]
     public function structureServiceUpdate(Structure $structure,Request $request, ManagerRegistry $doctrine): Response
     {
         $partner = $structure->getPartner();
@@ -253,6 +305,7 @@ class StructureController extends AbstractController
     }
 
     #[Route('/structure/data/update/{id}', name: 'app_structure_data_update')]
+    #[security("is_granted('ROLE_FRANCHISE')")]
     public function partnerDataUpdate(Structure $structure,Request $request, ManagerRegistry $doctrine): Response
     {
         $partner = $structure->getPartner();
