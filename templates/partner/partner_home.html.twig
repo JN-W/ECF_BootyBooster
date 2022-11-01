@@ -15,6 +15,21 @@
             <div class="row text-center">
                 <h1>Annuaire des partenaires de Booty Booster</h1>
             </div>
+
+            {#---------Filtre actif/désactivé/all--------------------#}
+
+            <div class="row text-center">
+                <div class="btn-group" role="group" aria-label="View filters">
+                    <button type="button" id="active-partner-only" class="btn my-btn">Actifs</button>
+                    <button type="button" id="all-partner" class="btn my-btn">Tous</button>
+                    <button type="button" id="inactive-partner-only" class="btn my-btn">Désactivés</button>
+                    <button type="button" id="no-partner" class="btn my-btn">Aucun</button>
+                </div>
+            </div>
+            {#-----------------------------#}
+
+
+
             {#-----------------------------#}
             <div class="row">
                 <table class="table table-hover table-responsive table-sm">
@@ -34,7 +49,7 @@
                     <tbody class="table-group-divider">
                     {% for partner in partners %}
 
-                        <tr>
+                        <tr class="partner-filter">
                             <th scope="row">
                                 {{ partner.name }}<br>
                                 {% if app.user and is_granted('ROLE_FRANCHISE')  %}

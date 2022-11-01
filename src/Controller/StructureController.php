@@ -26,7 +26,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class StructureController extends AbstractController
 {
     #[Route('/structure/creation', name: 'app_structure_creation')]
-    #[security("is_granted('ROLE_FRANCHISE')")]
+    #[Security("is_granted('ROLE_FRANCHISE')")]
     public function structureMaker(MailerInterface $mailer, Request $request,  EntityManagerInterface $entityManager): Response
     {
         $structure = new Structure();
@@ -43,17 +43,31 @@ class StructureController extends AbstractController
             $structure->getUser()->setRoles($currentRole);
             $entityManager->persist($structure);
             $entityManager->flush();
-            // do anything else you need here, like send an email
-            $email = (new TemplatedEmail())
+
+            // Send email to structure
+            $emailStructure = (new TemplatedEmail())
                 ->from(new Address('YourBootyCoach@exemple.com','Booty coach'))
                 ->to(new Address($structure->getUser()->getEmail(), 'New player'))
                 -> subject('Chouette ! Une nouvelle structure Booty Booster !')
-                ->htmlTemplate('mail/new_partner.html.twig')
+                ->htmlTemplate('mail/new_structure.html.twig')
                 ->context([
                     'structure' => $structure
                 ]);
 
-            $mailer->send($email);
+            $mailer->send($emailStructure);
+
+            // Send email to partner of structure
+
+            $emailPartner = (new TemplatedEmail())
+                ->from(new Address('YourBootyCoach@exemple.com','Booty coach'))
+                ->to(new Address($structure->getPartner()->getUser()->getEmail(), 'New player'))
+                -> subject('Félicitation pour la création de votre nouvelle structure !')
+                ->htmlTemplate('mail/new_structure_for_partner.html.twig')
+                ->context([
+                    'structure' => $structure
+                ]);
+
+            $mailer->send($emailPartner);
 
             return $this->redirectToRoute('app_home');
         }
@@ -148,16 +162,32 @@ class StructureController extends AbstractController
             $entityManager->persist($structure);
             $entityManager->flush();
             // do anything else you need here, like send an email
-            $email = (new TemplatedEmail())
+
+            // Send email to structure
+            $emailStructure = (new TemplatedEmail())
                 ->from(new Address('YourBootyCoach@exemple.com','Booty coach'))
                 ->to(new Address($structure->getUser()->getEmail(), 'New player'))
                 -> subject('Chouette ! Une nouvelle structure Booty Booster !')
-                ->htmlTemplate('mail/new_partner.html.twig')
+                ->htmlTemplate('mail/new_structure.html.twig')
                 ->context([
                     'structure' => $structure
                 ]);
 
-            $mailer->send($email);
+            $mailer->send($emailStructure);
+
+            // Send email to partner of structure
+
+            $emailPartner = (new TemplatedEmail())
+                ->from(new Address('YourBootyCoach@exemple.com','Booty coach'))
+                ->to(new Address($structure->getPartner()->getUser()->getEmail(), 'New player'))
+                -> subject('Félicitation pour la création de votre nouvelle structure !')
+                ->htmlTemplate('mail/new_structure_for_partner.html.twig')
+                ->context([
+                    'structure' => $structure
+                ]);
+
+            $mailer->send($emailPartner);
+
             return $this->redirectToRoute('app_partner_detail', ['id' => $idPartner]);
         }
 
@@ -193,7 +223,7 @@ class StructureController extends AbstractController
     #[Route('/structure/creation/{id_partner}/structure_data/{id_user}', name: 'app_structure_creation_structure_data_with_user')]
     #[Entity('partner', options: ['id' => 'id_partner'])]
     #[Entity('user', options: ['id' => 'id_user'])]
-    #[security("is_granted('ROLE_FRANCHISE')")]
+    #[Security("is_granted('ROLE_FRANCHISE')")]
     public function structureMakerWithUserCreationStepStructure(MailerInterface $mailer, Request $request, Partner $partner,User $user , EntityManagerInterface $entityManager): Response
     {
         //Store partner id for redirection
@@ -228,16 +258,32 @@ class StructureController extends AbstractController
             $entityManager->persist($structure);
             $entityManager->flush();
             // do anything else you need here, like send an email
-            $email = (new TemplatedEmail())
+
+            // Send email to structure
+            $emailStructure = (new TemplatedEmail())
                 ->from(new Address('YourBootyCoach@exemple.com','Booty coach'))
                 ->to(new Address($structure->getUser()->getEmail(), 'New player'))
                 -> subject('Chouette ! Une nouvelle structure Booty Booster !')
-                ->htmlTemplate('mail/new_partner.html.twig')
+                ->htmlTemplate('mail/new_structure.html.twig')
                 ->context([
                     'structure' => $structure
                 ]);
 
-            $mailer->send($email);
+            $mailer->send($emailStructure);
+
+            // Send email to partner of structure
+
+            $emailPartner = (new TemplatedEmail())
+                ->from(new Address('YourBootyCoach@exemple.com','Booty coach'))
+                ->to(new Address($structure->getPartner()->getUser()->getEmail(), 'New player'))
+                -> subject('Félicitation pour la création de votre nouvelle structure !')
+                ->htmlTemplate('mail/new_structure_for_partner.html.twig')
+                ->context([
+                    'structure' => $structure
+                ]);
+
+            $mailer->send($emailPartner);
+
             return $this->redirectToRoute('app_partner_detail', ['id' => $idPartner]);
         }
 

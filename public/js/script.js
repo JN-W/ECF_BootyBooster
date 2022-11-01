@@ -44,8 +44,31 @@ jQuery(document).ready(() => {
         $("#deleteConfirmModal").modal("hide");
     });
 
+    // Filter for view partner_home on partner status actif / tous / désactivé
 
+    // All partners
+    $('#all-partner').click(function(){
+       $('.partner-filter').removeClass(['d-block', 'd-none']).addClass('d-block')
+    });
 
+    // // Active partner only
+    // $('#active-partner-only').click(function(){
+    //     $('.partner-filter').removeClass(['d-block', 'd-none'])
+    //     // Si utilisateur is active ?
+    //     $('.partner-filter').addClass('d-block')
+    // });
+    //
+    // // Active partner only
+    // $('#inactive-partner-only').click(function(){
+    //     $('.partner-filter').removeClass(['d-block', 'd-none'])
+    //     // Si utilisateur is inactive ?
+    //     $('.partner-filter').addClass('d-block')
+    // });
+
+    // No partners for test
+    $('#no-partner').click(function(){
+        $('.partner-filter').removeClass(['d-block', 'd-none']).addClass('d-none')
+    });
 
 // Fermeture jquery
 })
