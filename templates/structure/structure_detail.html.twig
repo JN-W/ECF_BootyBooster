@@ -32,42 +32,28 @@
                     </thead>
                     <tbody class="table-group-divider">
                     <tr>
-                        <th scope="row">
-                            Adresse
-                        </th>
-                        <th >
-                            {{ structure.address }}
-                        </th>
+                        <td>Adresse</td>
+                        <td>{{ structure.address }}</td>
                     </tr>
 
                     <tr>
-                        <th scope="row">
-                            Statut
-                        </th>
-                        <th>
+                        <td>Statut</td>
+                        <td>
                             <div class="form-check form-switch">
                                 <input class="form-check-input structure-switch" type="checkbox" role="switch" id="" {{ (structure.isActive) ? 'checked' : '' }} data-id="{{ structure.id }}">
                                 {#<label class="form-check-label" for="SwitchPartnerDetail">Désactivé / Actif </label>#}
                             </div>
-                        </th>
+                        </td>
                     </tr>
 
                     <tr>
-                        <th scope="row">
-                            Structure du partenaire
-                        </th>
-                        <th >
-                            {{ structure.partner }}
-                        </th>
+                        <td>Structure du partenaire</td>
+                        <td>{{ structure.partner }}</td>
                     </tr>
 
                     <tr>
-                        <th scope="row">
-                            Compte utilisateur associé
-                        </th>
-                        <th >
-                            {{ structure.user }}
-                        </th>
+                        <td>Compte utilisateur associé</td>
+                        <td>{{ structure.user }}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -93,9 +79,7 @@
                     <tbody class="table-group-divider">
                     {%  for key, service in structure.service %}
                         <tr>
-                            <th scope="row">
-                                {{ structure.service | slice(key, 1)| join(', ') }}
-                            </th>
+                            <td>{{ structure.service | slice(key, 1)| join(', ') }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -109,5 +93,4 @@
             {#-----------------------------#}
 
         </div>
-    </div>
 {% endblock %}
