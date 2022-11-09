@@ -46,7 +46,7 @@
                             {% if app.user and is_granted('ROLE_FRANCHISE')  %}
                                 <td>
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input partner-switch" type="checkbox" role="switch" id="flexSwitchCheckDefault" {{ (partner.isActive) ? 'checked' : '' }} data-id="{{ partner.id }}">
+                                        <input class="form-check-input partner-switch" type="checkbox" role="switch" id="" {{ (partner.isActive) ? 'checked' : '' }} data-id="{{ partner.id }}">
                                         {# <label class="form-check-label" for="flexSwitchCheckDefault">Activer / Désactiver </label>#}
                                     </div>
                                 </td>
