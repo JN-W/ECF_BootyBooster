@@ -23,8 +23,8 @@
                             {
                                 for (let i = 0; i < data.length; i++) {
                                     let current = JSON.parse(data[i]);
-                                    console.log(JSON.parse(data[i]))
-                                    $('#search-partner-result').append(`<a class="search-result list-group-item list-group-item-action" href="#" >${current['name']}</a>`);
+                                    let url = `/partner/detail/${current['id']}`
+                                    $('#search-partner-result').append(`<a class="search-result list-group-item list-group-item-action" href="${url}">${current['name']}</a>`);
                                 }
                             }
                         }

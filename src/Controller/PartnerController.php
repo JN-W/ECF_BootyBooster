@@ -147,6 +147,8 @@ class PartnerController extends AbstractController
         $repository = $doctrine->getRepository(Partner::class);
         $searchResults = $repository->findByWord($userSearchText);
 
+        dump($searchResults);
+
         // J'initialise un tableau vide
         $formated_partner=[];
         $JSON_formated_partner=[];
