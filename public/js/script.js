@@ -3,7 +3,7 @@ jQuery(document).ready(() => {
 
 //     Activate & Deactivate partner using switch in jquery syntax
     window.onload = () => {
-        let activationSwitches = $("[type=checkbox]")
+        let activationSwitches = $(".partner-switch[type=checkbox]")
         for (let activationSwitch of activationSwitches ){
             $(activationSwitch).click( function(){
                 $.ajax({
@@ -17,7 +17,7 @@ jQuery(document).ready(() => {
     //     Activate & Deactivate structure using switch in jquery syntax
     // Controller si ça applique les 2 activation.switch en même temps vu qu'on ecoute tous les switch de type checkbox
     window.onload = () => {
-        let activationSwitches = $("[type=checkbox]")
+        let activationSwitches = $(".structure-switch[type=checkbox]")
         for (let activationSwitch of activationSwitches ){
             $(activationSwitch).click( function(){
                 $.ajax({
@@ -44,31 +44,6 @@ jQuery(document).ready(() => {
         $("#deleteConfirmModal").modal("hide");
     });
 
-    // Filter for view partner_home on partner status actif / tous / désactivé
-
-    // All partners
-    $('#all-partner').click(function(){
-       $('.partner-filter').removeClass(['d-block', 'd-none']).addClass('d-block')
-    });
-
-    // // Active partner only
-    // $('#active-partner-only').click(function(){
-    //     $('.partner-filter').removeClass(['d-block', 'd-none'])
-    //     // Si utilisateur is active ?
-    //     $('.partner-filter').addClass('d-block')
-    // });
-    //
-    // // Active partner only
-    // $('#inactive-partner-only').click(function(){
-    //     $('.partner-filter').removeClass(['d-block', 'd-none'])
-    //     // Si utilisateur is inactive ?
-    //     $('.partner-filter').addClass('d-block')
-    // });
-
-    // No partners for test
-    $('#no-partner').click(function(){
-        $('.partner-filter').removeClass(['d-block', 'd-none']).addClass('d-none')
-    });
 
 // Fermeture jquery
 })

@@ -1,0 +1,227 @@
+[33mcommit bcb76aa6bd3ae2a2078d00f80d272438983e5389[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Tue Nov 1 09:00:40 2022 +0100
+
+    improved mail sending function
+
+[33mcommit cae01dd51f32e28fc99f93543faf43263a95d0d7[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Mon Oct 31 20:50:02 2022 +0100
+
+    security improvements
+
+[33mcommit efeb4cef73b94891c7dc02e87625a8b2d5a5849a[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Sun Oct 30 22:50:13 2022 +0100
+
+    fixed responsive bug / deploy delete confirmation modal / fixed connected as position and change text according to screen device
+
+[33mcommit bed5c600aed03623e6014b67474d9805c3ffc53c[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Sun Oct 30 20:45:06 2022 +0100
+
+    prior pushing online
+
+[33mcommit 584c434e225ccdb6d35e4a390fb2230814697796[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Sun Oct 30 20:43:53 2022 +0100
+
+    added csrf measures
+
+[33mcommit c53074148eaf04da8b7783de6feff131a497c0aa[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Sun Oct 30 19:33:03 2022 +0100
+
+    prior to csrf security  fixture
+
+[33mcommit d52236cd20f63043b668b73540361664e6530da3[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Sun Oct 30 18:26:36 2022 +0100
+
+    creation of partner/structure tunnel to create user in the same time
+
+[33mcommit aeb8781b7c53e5a0cc2565c79cb71e661b708cff[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Sun Oct 30 16:35:21 2022 +0100
+
+    update details views of partner and structure / add some returns buttons
+
+[33mcommit 56d0bf8cf359ee383d41d7c56e797fba5fd33283[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Sun Oct 30 09:32:49 2022 +0100
+
+    update of service related functions and menu
+
+[33mcommit 314bb1dd3e860e7c30b22a2a1c1096d5a05dfd79[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Fri Oct 28 15:01:13 2022 +0200
+
+    remove webpack encore
+
+[33mcommit 57d0a3329a0cd4b619d3e9def13e5130545c02e7[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Fri Oct 28 14:36:14 2022 +0200
+
+    remove and reinstall apache-pack to execute recipe during installation and automatically create .htaccess file
+
+[33mcommit 796bd93f98bb7991eee9b97d4f33448e13fc0218[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Fri Oct 28 14:12:21 2022 +0200
+
+    switch monolog bundle from dev to prod
+
+[33mcommit 41ec1a9a76f0bb9e9d5b224993a1da71fbe692e5[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Fri Oct 28 12:25:40 2022 +0200
+
+    create road with only /
+
+[33mcommit 2c00a995d7189818d6f2e96808e4c95103366c5f[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Fri Oct 28 12:07:25 2022 +0200
+
+    add apache pack
+
+[33mcommit 9547c628de56ab81e6a2d48343ab3311ac21aa36[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Fri Oct 28 10:08:34 2022 +0200
+
+    fixing typo in .env file
+
+[33mcommit 15ade03852e20426304c9f59944aa9d2b93c6f35[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Fri Oct 28 09:58:30 2022 +0200
+
+    configuring jawsdB in .env file
+
+[33mcommit 0bb559160a28cc738a276d7c3e91421acec6c22f[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Thu Oct 27 23:21:02 2022 +0200
+
+    switch .env APP_ENV=dev to prod
+
+[33mcommit 469895ee010f8b6fe1619e73571b3ef2885ef4fe[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Thu Oct 27 23:08:42 2022 +0200
+
+    try to remove autoscript from post-install-cmd
+
+[33mcommit bfb1d760959983e3f6b1328ecd16492bde2e8d03[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Thu Oct 27 22:49:42 2022 +0200
+
+    put back doctrine-fixtures-bundle to dev only
+
+[33mcommit c6d86fcc187e45c5e6350bb60131d6dd320708d7[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Thu Oct 27 22:39:00 2022 +0200
+
+    put doctrine-fixture-bundle in prod
+
+[33mcommit 8c1279da0e4674d227d89e976a3165444e99a813[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Thu Oct 27 22:26:08 2022 +0200
+
+    modify Procfile
+
+[33mcommit b775971ba6b04860881a1c80b5668d0bf55ca975[m[33m ([m[1;31morigin/remoteMaster[m[33m)[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Thu Oct 27 17:53:23 2022 +0200
+
+    add composer.json and composer.lock after running a composer update
+
+[33mcommit 8ca41f5ea27c8fc8b01f1afa17120ff69e3e10bc[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Thu Oct 27 17:36:44 2022 +0200
+
+    add Procfile for heroku deployment
+
+[33mcommit d05670cb013ec785d043703774751a2f28d77202[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Thu Oct 27 11:54:34 2022 +0200
+
+    styling
+
+[33mcommit 78f2c3142a1423ed5fd6b23f83c018e3c6668b8c[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Wed Oct 26 15:56:17 2022 +0200
+
+    styling logging page
+
+[33mcommit 1fecd22a35feaaf490eb11362f009d6136aa2bf1[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Tue Oct 25 22:05:03 2022 +0200
+
+    add mail function / fail to install webpack encore
+
+[33mcommit b0c714050e11ad5b64911d7ca9ec92dcba13f07a[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Sun Oct 23 22:38:12 2022 +0200
+
+    add confirmation modal for partner deletion
+
+[33mcommit bc55079543a17fbf38e43b7716f26362b906bf11[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Sat Oct 22 00:03:45 2022 +0200
+
+    search function tuning : focus on search bar, compare in lower caracter, delete old result, blanck field when opening modal, ...
+
+[33mcommit 1d0925321c357063159b5393d91efeb0843c31f2[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Fri Oct 21 14:24:47 2022 +0200
+
+    modify structure creation to integrate service from partner at creation and add function to activate/deactivate partner using switch
+
+[33mcommit 04bfe2d28b6d70ceaeab004e0a4de1cad0599cd8[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Fri Oct 21 10:47:54 2022 +0200
+
+    table display for partner main dashboard and add functions update and delete for partner
+
+[33mcommit b68e2ec0fa8ca73c1450ae6bd771aef7a2bdb427[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Wed Oct 19 14:50:34 2022 +0200
+
+    add role to partner or structure during creation process
+
+[33mcommit 3e558771e91ff00a9044686d3bd11560cad79a98[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Wed Oct 19 11:57:22 2022 +0200
+
+    add creation functions for partner / structure / service
+
+[33mcommit 620610a4c046c4c4d9eb58ede10a44ca3c832c9d[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Wed Oct 19 10:56:09 2022 +0200
+
+    tables creation in database with relations between them
+
+[33mcommit fdece0e3e0d482bac78e27f36a2c0f8a3c5e41ab[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Tue Oct 18 22:50:26 2022 +0200
+
+    setting up bootstrap and preparing project architecture to store image css and js
+
+[33mcommit d071fc78b70e93d5a7e2976b63d59dd62e82ee9a[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Tue Oct 18 22:21:37 2022 +0200
+
+    assigning role to user during creation process - FAIL
+
+[33mcommit 7aeabf81b2d4dd2715f7780fb97088835257ca4e[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Tue Oct 18 18:24:45 2022 +0200
+
+    add logout functionnality
+
+[33mcommit 8425356264739a69e1170c4ff585fcc49197496d[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Tue Oct 18 17:47:19 2022 +0200
+
+    creation of user entity and login process
+
+[33mcommit 06725b19dc768a02663471e6f028705153c4fd47[m
+Author: JN WESOLY <jn.wesoly@gmail.com>
+Date:   Tue Oct 18 16:43:21 2022 +0200
+
+    very 1st commit after project creation and main dependancies installation
