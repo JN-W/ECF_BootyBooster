@@ -14,66 +14,48 @@
 
             <div class="row text-center">
                 <h1>Tableau de bord du partenaire : {{ partner.name }}</h1>
-{#                <a href="{{path('app_partner_update', {'id': partner.id})}}" class="btn btn-warning m-md-2 btn-update"><i class="bi bi-pen"></i></a><br>#}
-
             </div>
 
             {#---------------Partner data--------------#}
             <div class="row">
                 <table class="table table-hover table-responsive table-sm">
+
                     <thead>
-                    <tr>
-                        <th scope="col">
-                            {% if app.user and is_granted('ROLE_FRANCHISE')  %}
-                                <a href="{{ path('app_partner_data_update', {'id' : partner.id})}}" class="m-md-2 "><i class="bi bi-pen"></i></a>
-                            {% endif %}
-                            Informations sur le partenaire
-
-                        </th>
-
-                    </tr>
+                        <tr>
+                            <th scope="col">
+                                {% if app.user and is_granted('ROLE_FRANCHISE')  %}
+                                    <a href="{{ path('app_partner_data_update', {'id' : partner.id})}}" class="m-md-2 "><i class="bi bi-pen"></i></a>
+                                {% endif %}
+                                Informations sur le partenaire
+                            </th>
+                        </tr>
                     </thead>
+
                     <tbody class="table-group-divider">
                         <tr>
-                            <th scope="row">
-                                Nom
-                            </th>
-                            <th >
-                                {{ partner.name }}
-                            </th>
+                            <td>Nom</td>
+                            <td >{{ partner.name }}</td>
                         </tr>
 
                         <tr>
-                            <th scope="row">
-                                Statut
-                            </th>
-                            <th>
+                            <td>Statut</td>
+                            <td>
                                 <div class="form-check form-switch">
                                         <input class="form-check-input partner-switch" type="checkbox" role="switch" id="" {{ (partner.isActive) ? 'checked' : '' }} data-id="{{ partner.id }}">
                                         {#<label class="form-check-label" for="SwitchPartnerDetail">Désactivé / Actif </label>#}
                                 </div>
-                            </th>
+                            </td>
                         </tr>
 
                         <tr>
-                            <th scope="row">
-                                Présentation
-                            </th>
-                            <th >
-                                {{ partner.description }}
-                            </th>
+                            <td>Présentation</td>
+                            <td >{{ partner.description }}</td>
                         </tr>
 
                         <tr>
-                            <th scope="row">
-                                Compte utilisateur associé
-                            </th>
-                            <th >
-                                {{ partner.user }}
-                            </th>
+                            <td>Compte utilisateur associé</td>
+                            <td >{{ partner.user }}</td>
                         </tr>
-
-
 
                     </tbody>
                 </table>
@@ -102,10 +84,7 @@
                         <tbody class="table-group-divider">
                         {%  for key, service in partner.service %}
                             <tr>
-                                <th scope="row">
-                                        {{ partner.service | slice(key, 1)| join(', ') }}
-                                </th>
-
+                                <td>{{ partner.service | slice(key, 1)| join(', ') }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -137,9 +116,7 @@
                     <tbody class="table-group-divider">
                     {%  for key, structure in partner.structures %}
                         <tr>
-                            <th scope="row">
-                                {{ partner.structures | slice(key, 1)| join(', ') }}
-                            </th>
+                            <td>{{ partner.structures | slice(key, 1)| join(', ') }}</td>
                             {% if app.user and is_granted('ROLE_FRANCHISE')  %}
 
                                 <td>
@@ -172,5 +149,4 @@
             {#-----------------------------#}
 
         </div>
-    </div>
 {% endblock %}

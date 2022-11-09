@@ -21,18 +21,19 @@
             <div class="row">
                 <table class="table table-hover table-responsive table-sm">
                     <thead>
-                    <tr>
-                        <th scope="col">Nom</th>
-                        {% if app.user and is_granted('ROLE_FRANCHISE')  %}
-                        <th scope="col">Statut</th>
-                        <th scope="col">Supprimer</th>
-                        {% endif %}
-                        <th scope="col">Description</th>
-                        <th scope="col">Structures</th>
-                        <th scope="col">Services souscrits par le partenaire</th>
+                        <tr>
+                            <th scope="col">Nom</th>
+                            {% if app.user and is_granted('ROLE_FRANCHISE')  %}
+                                <th scope="col">Statut</th>
+                                <th scope="col">Supprimer</th>
+                            {% endif %}
+                            <th scope="col">Description</th>
+                            <th scope="col">Structures</th>
+                            <th scope="col">Services souscrits par le partenaire</th>
 
-                    </tr>
+                        </tr>
                     </thead>
+
                     <tbody class="table-group-divider">
                     {% for partner in partners %}
 

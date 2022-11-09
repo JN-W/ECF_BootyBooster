@@ -143,11 +143,12 @@ class PartnerController extends AbstractController
     public function partner_searcher( ManagerRegistry $doctrine, Request $request)
     {
         $userSearchText = $request->request->get('userSearchText');
+        $newstr = filter_var($userSearchText,FILTER_SANITIZE_STRING);
 
         $repository = $doctrine->getRepository(Partner::class);
-        $searchResults = $repository->findByWord($userSearchText);
+        $searchResults = $repository->findByWord($newstr);
 
-        dump($searchResults);
+        dump($newstr);
 
         // J'initialise un tableau vide
         $formated_partner=[];
