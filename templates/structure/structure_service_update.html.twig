@@ -4,13 +4,15 @@
 
 {% block body %}
     <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-        <h1>Edition des services de {{ structure.address }}</h1>
+        <h1>Edition des services de la structure {{ structure.address }}, affiliée au partenaire {{ partner.name }}</h1>
     </div>
 
     <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-{#        {{ dump(partner) }}#}
-{#        {{ dump(service_from_partner) }}#}
+        {{ dump(partner) }}
+        {{ dump(service_from_partner) }}
     </div>
+
+    {#    code en comm pour essai sans fromupdatetype#}
 
     {{ form_start(structureServiceUpdateForm) }}
 
@@ -30,6 +32,28 @@
 
     {{ form_rest(structureServiceUpdateForm) }}
     {{ form_end(structureServiceUpdateForm) }}
+
+{#    code en comm pour essai sans fromupdatetype#}
+
+    {#  ------test de formulaire sans le formtype------------- #}
+{#    {%  for service in service_from_partner %}#}
+{#    <div class="form-check">#}
+{#        <input class="form-check-input" type="checkbox" value="" id="">#}
+{#        <label class="form-check-label" for="flexCheckDefault">#}
+{#            {{ service.title }}#}
+{#        </label>#}
+{#    </div>#}
+{#    {% endfor %}#}
+
+{#    {{ form_start(structureServiceUpdateAccordingPartnerForm) }}#}
+{#    {{ form_row(structureServiceUpdateAccordingPartnerForm) }}#}
+{#    <button type="submit">Enregistrer</button>#}
+{#    {{ form_end(structureServiceUpdateAccordingPartnerForm) }}#}
+
+
+
+    {#  ------fin du test------------- #}
+
 
     {#---------return boutons-------------#}
     {{ include('partial/_return_to_structure.html.twig') }}

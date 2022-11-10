@@ -9,7 +9,6 @@
         {{ include('partial/_menuCommun.html.twig') }}
 
         {# Therefore the following must be in a col also #}
-
         <div class="col">
 
             <div class="row text-center">
@@ -62,36 +61,33 @@
             </div>
             {#-----------------------------#}
 
+            {#---------------Partner global service list--------------#}
+            <div class="row">
+                <table class="table table-hover table-responsive table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col">
+                            {% if app.user and is_granted('ROLE_FRANCHISE')  %}
+                                <a href="{{ path('app_partner_service_update', {'id' : partner.id})}}" class="m-md-2 "><i class="bi bi-pen"></i></a>
+                            {% endif %}
+                            Services globaux du partenaire
+                            <span>
+                                <span class="badge text-bg-secondary">{{ serviceCounter }}</span>
+                            </span>
+                        </th>
 
-
-                {#---------------Partner global service list--------------#}
-                <div class="row">
-                    <table class="table table-hover table-responsive table-sm">
-                        <thead>
+                    </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                    {%  for key, service in partner.service %}
                         <tr>
-                            <th scope="col">
-                                {% if app.user and is_granted('ROLE_FRANCHISE')  %}
-                                    <a href="{{ path('app_partner_service_update', {'id' : partner.id})}}" class="m-md-2 "><i class="bi bi-pen"></i></a>
-                                {% endif %}
-                                Services globaux du partenaire
-                                <span>
-                                    <span class="badge text-bg-secondary">{{ serviceCounter }}</span>
-                                </span>
-                            </th>
-
+                            <td>{{ partner.service | slice(key, 1)| join(', ') }}</td>
                         </tr>
-                        </thead>
-                        <tbody class="table-group-divider">
-                        {%  for key, service in partner.service %}
-                            <tr>
-                                <td>{{ partner.service | slice(key, 1)| join(', ') }}</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                {#-----------------------------#}
-
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {#-----------------------------#}
 
             {#---------------Partner structure list--------------#}
             <div class="row">
@@ -147,6 +143,5 @@
             {#---------modal-------------#}
             {{ include('partial/_deleteConfirmModal.html.twig') }}
             {#-----------------------------#}
-
         </div>
 {% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Partner;
+use App\Entity\Service;
 use App\Entity\Structure;
 use App\Entity\User;
 use App\Form\PartnerType;
@@ -17,6 +18,8 @@ use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
@@ -324,6 +327,54 @@ class StructureController extends AbstractController
         return new Response('true');
     }
 
+//    #[Route('/structure/service/update/{id}', name: 'app_structure_service_update')]
+//    #[security("is_granted('ROLE_FRANCHISE')")]
+//    public function structureServiceUpdate(Structure $structure,Request $request, ManagerRegistry $doctrine): Response
+//    {
+//        $partner = $structure->getPartner();
+//        $partner->getService();
+//        $service_from_partner = $partner->getService()->getValues();
+//        $idStructure = $structure->getId();
+//
+////        DEBUT DU TEST
+//
+//        $testArray = ['toto', 'tata'];
+//        $defaultData = [];
+////        $form = $this->createFormBuilder($defaultData)
+//        $form = $this->createFormBuilder($defaultData)
+//            ->add('serviceFromPartner',ChoiceType::class, [
+//                'choices' => $testArray,
+//                'expanded'    => true,
+//                'multiple'    => true,
+//                ])
+//            ->getForm();
+//
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            // Supprimer tous les services de la structure
+//            foreach ($service_from_partner as $service){
+//                $structure->removeService($service);
+//            }
+//            $data = $form->getData();
+//            foreach($data as $service){
+//                $structure->addService($service);
+//            }
+//
+//            $entityManager = $doctrine->getManager();
+//            $entityManager->flush();
+//            return $this->redirectToRoute('app_structure_detail', ['id'=>$idStructure]);
+//        }
+//
+//        // ... render the form
+//        return $this->render('structure/structure_service_update.html.twig', [
+//            'structureServiceUpdateAccordingPartnerForm' => $form->createView(),
+//            'structure' => $structure,
+//            'partner' => $partner,
+//            'service_from_partner' => $service_from_partner
+//        ]);
+//    }
+
     #[Route('/structure/service/update/{id}', name: 'app_structure_service_update')]
     #[security("is_granted('ROLE_FRANCHISE')")]
     public function structureServiceUpdate(Structure $structure,Request $request, ManagerRegistry $doctrine): Response
@@ -332,8 +383,10 @@ class StructureController extends AbstractController
         $partner->getService();
         $service_from_partner = $partner->getService()->getValues();
         $idStructure = $structure->getId();
+
         $form = $this->createForm(StructureServiceUpdateType::class, $structure);
         $form->handleRequest($request);
+
 
         if($form->isSubmitted() && $form->isValid())
         {
@@ -349,6 +402,9 @@ class StructureController extends AbstractController
             'service_from_partner' => $service_from_partner
         ]);
     }
+
+
+
 
     #[Route('/structure/data/update/{id}', name: 'app_structure_data_update')]
     #[security("is_granted('ROLE_FRANCHISE')")]
