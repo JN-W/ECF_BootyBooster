@@ -1,0 +1,281 @@
+/*COLOR GRAPHIC PALLET*/
+    /*Violet*/
+    /*color: #52006A;*/
+    /*color: rgb(82,0,106);*/
+
+    /*Rose*/
+    /*color: #CD113B;*/
+    /*color: rgb(205,17,59);*/
+
+    /*Orange*/
+    /*color: #FF7600;*/
+    /*color: rgb(205,118,0);*/
+
+    /*Jaune*/
+    /*color: #FFA900;*/
+    /*color: rgb(205,169,0);*/
+
+
+
+body{
+    font-family: 'Fredoka', sans-serif;
+    /*font-family: 'Fredoka One', cursive;*/
+
+}
+
+h1{
+    color: #52006A;
+}
+
+.bg-pink{
+    background: rgb(205,17,59);
+    background: linear-gradient(to bottom, rgba(205,17,59,0.7931547619047619) 14%, rgba(255,255,255,1) 78%);
+}
+.bg-pink-reverse{
+    background: rgb(205,17,59);
+    background: linear-gradient(to top, rgba(205,17,59,0.7931547619047619) 14%, rgba(255,255,255,1) 78%);
+}
+
+.connectedAs{
+    position : fixed;
+    bottom: 0px;
+    right: 0px;
+    left:0px;
+    width: 100%;
+}
+
+.header-top{
+    width: 100%;
+    right: 0px;
+    left:0px;
+}
+
+.logo{
+    max-width: 100px;
+}
+
+/*Form style overriding bootstrap */
+.form-control{
+    border-color: #52006A;
+}
+
+.form-control:focus {
+    color: #212529;
+    border-color: #52006A;
+    box-shadow: 0 0 0 0.25rem rgba(82, 0, 106, 0.2);
+}
+
+.form-row{
+    max-width: 75%;
+}
+
+/*Form style and other item specific to login form*/
+.label-login{
+    font-size: 2em;
+    color: #52006A;
+}
+
+.register-error{
+    width: fit-content;
+    font-size: 1.3rem;
+    color: #fff;
+}
+
+.my-label{
+    font-size: 1em;
+    color: #52006A;
+}
+
+
+/*START btn submit myself*/
+/*Replace with neon effect button, to see if usefull for other button*/
+.btn-submit,
+.my-btn{
+    /*width: 80%;*/
+    width: fit-content;
+    color: #52006A;
+    border-color: #52006A;
+    box-shadow: 0 0 0 0.25rem rgba(82, 0, 106, 0.2);
+    border-radius: 3px;
+}
+
+.btn-submit:hover,
+.my-btn:hover{
+    color: #CD113B;
+    /*border-color: #52006A;*/
+    border-color: rgb(205, 17, 59);
+    background: rgba(205, 17, 59, 0.2);
+    box-shadow: 0 0 0 0.25rem rgba(205, 17, 59, 1);
+}
+/*END btn submit myself*/
+
+/*START TEST button neon*/
+
+.btn-search{
+    background-color: #fff;
+    border: solid 1px #52006A;
+    color: #52006A;
+
+}
+
+button.btn.btn-search:hover
+{
+    background-color: #fff;
+    box-shadow: 0 0 10px #52006A, 0 0 40px #52006A, 0 0 80px #52006A;
+}
+
+#neon {
+    position: relative;
+    display: inline-block;
+    padding: 15px 30px;
+    color: #52006A;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-decoration: none;
+    font-size: 24px;
+    overflow: hidden;
+    transition: 0.2s;
+    background-color: #fff;
+    border: none;
+}
+
+
+
+
+#neon:hover
+{
+    color: #CD113B;
+    background: #fff;
+    box-shadow: 0 0 10px #CD113B, 0 0 40px #CD113B, 0 0 80px #CD113B;
+    transition-delay: 1s;
+}
+
+#neon:hover
+{
+    border-radius: 3px;
+    transition-delay: 1.3s;
+}
+
+#neon span
+{
+    position: absolute;
+    display: block;
+}
+
+
+#neon span:nth-child(1)
+{
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #CD113B);
+}
+
+
+#neon:hover span:nth-child(1)
+{
+    left: 100%;
+    transition: 1s;
+}
+
+#neon span:nth-child(3)
+{
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg, transparent, #CD113B);
+}
+
+#neon:hover span:nth-child(3)
+{
+    right: 100%;
+    transition: 1s;
+    transition-delay: 0.5s;
+}
+
+
+
+#neon span:nth-child(2)
+{
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #CD113B);
+}
+
+#neon:hover span:nth-child(2)
+{
+    top: 100%;
+    transition: 1s;
+    transition-delay: 0.25s;
+}
+
+
+
+#neon span:nth-child(4)
+{
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, #CD113B);
+}
+
+#neon:hover span:nth-child(4)
+{
+    bottom: 100%;
+    transition: 1s;
+    transition-delay: 0.75s;
+}
+
+
+
+/*END TEST  button neon*/
+
+
+
+/*Menu style overriding bootstrap */
+
+/*A retravailler pour le responsive*/
+
+/*@media screen and (min-width: 575px) {*/
+/*    .accordion{*/
+/*        position: fixed;*/
+/*        top: 20%;*/
+/*    }*/
+/*}*/
+
+
+.accordion-button:focus {
+    z-index: 3;
+    border-color: rgba(82,0,106,1);
+    outline: 0;
+    box-shadow: rgba(82,0,106,0.5) 3px 3px 3px 3px;
+}
+.accordion-button:not(.collapsed) {
+    color: rgb(255,255,255);
+    background-color: rgba(82,0,106,0.2);
+}
+a {
+    text-decoration: none;
+    color: #52006A;
+
+}
+
+a:hover{
+    color:#CD113B;
+    cursor: pointer;
+    /*background-color: #52006A;*/
+}
+
+/*Override bootstrap table design*/
+.table-hover{
+    /*background-color: #52006A;*/
+}
+
+li.list-group-item{
+    background-color: transparent;
+}

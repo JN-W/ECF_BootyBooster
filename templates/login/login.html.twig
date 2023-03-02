@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Identifiez vous
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+            <div class="my-3 p-3 my-5 p-3 col-6 offset-3  ">
+                <h1> Tout commence par une connection </h1>
+            </div>
+    </div>
+
+    <div class="row justify-content-center ">
+{#    <div class="form-container row form-row">#}
+        {% if error %}
+        <div class="row">
+            <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3 register-error text-bg-danger ">
+
+                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            </div>
+        </div>
+        {% endif %}
+
+        <form action="{{ path('app_login') }}" method="post">
+            <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+                <label for="username" class="label-login">Email :</label>
+                <input type="text" id="username" name="_username" value="" class="form-control form-control-lg"/>
+            </div>
+            <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+                <label for="password" class="label-login">Password :</label>
+                <input type="password" id="password" name="_password" class="form-control form-control-lg"/>
+            </div>
+
+            {# CSRF counter measure#}
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+
+            <div class="my-5 p-3 col-6 offset-3 " >
+
+                <button  id="neon" type="submit">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Let's go !
+                </button>
+            </div>
+
+
+
+        </form>
+    </div>
+{% endblock %}

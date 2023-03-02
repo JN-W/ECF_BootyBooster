@@ -1,0 +1,42 @@
+<nav class="navbar bg-pink header-top sticky-top">
+    <div class="row container-fluid text-center">
+
+        <div class="col col-md-3 col-xl-2 text-center">
+            <a class="navbar-brand" href="{{path('app_partner_home')}}">
+                <img src="{{ asset('ressource/Booty Booster_logo.png')  }}" alt="booty booster logo" class="logo">
+            </a>
+        </div>
+
+        {# // START - Search bar that toggle modal window- #}
+        {% if app.user %}
+        <div class="col col-md-4 ">
+            <div class="d-flex" ><!--role="search"-->
+                <input class="form-control me-2"  placeholder="Search" aria-label="Search"  data-bs-toggle="modal" data-bs-target="#exampleModal"> <!--id="search-franchised" type="search"-->
+                <button class="btn btn-search" data-bs-toggle="modal" data-bs-target="#exampleModal">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        {% endif %}
+        {# // END - Search bar that toggle modal window - #}
+
+        <div class="col col-md-2 offset-md-3 offset-xl-2 ">
+            {% if app.user  %}
+                <a href="{{ path('app_logout') }}">Déconnexion </a>
+            {% else %}
+{#                <a href="{{ path('app_login') }}">Connexion </a>#}
+            {% endif %}
+        </div>
+
+
+    </div>
+</nav>
+
+{#{% if app.user %}#}
+{#<div class="row text-center bg-pink ">#}
+{#    <p>Vous êtes connecté en tant que {{ app.user.email }}</p>#}
+{#</div>#}
+{#{% endif %}#}

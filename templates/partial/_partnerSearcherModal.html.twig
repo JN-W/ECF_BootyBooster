@@ -1,0 +1,43 @@
+{% block modal %}
+    {# // START - Search modal window - #}
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Rechercher un partenaire grâce à son nom</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    {# START - Search bar within the modal window - #}
+                    <div class="col">
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-partner" >
+                            <button class="btn btn-search" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                    {# END - Search bar within the modal window - #}
+
+                    {# //START - Search results display - #}
+                    <div  class="result m-3">
+                        Résultat de recherche : <br>
+                        <div class="list-group" id="search-partner-result">
+
+                        </div>
+                    </div>
+                    {# //END - Search results display - #}
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {# // END - Search modal window - #}
+
+{% endblock %}

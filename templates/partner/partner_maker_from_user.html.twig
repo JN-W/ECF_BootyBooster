@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edition d'un partenaire{% endblock %}
+
+{% block body %}
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        <h1>Edition du partenaire</h1>
+    </div>
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        <p>Le partenaire crée sera associé au compte utilisateur : <strong>{{ user.email }}</strong></p>
+    </div>
+
+{{ form_start(partnerCreationFromUserForm) }}
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        {{ form_label(partnerCreationFromUserForm.name, 'Nom du partenaire', {'label_attr': {'class': 'my-label'}}) }}
+        {{ form_widget(partnerCreationFromUserForm.name, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(partnerCreationFromUserForm.name) }}
+        {{ form_help(partnerCreationFromUserForm.name) }}
+    </div>
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        {{ form_label(partnerCreationFromUserForm.description, 'Présentation du partenaire', {'label_attr': {'class': 'my-label'}}) }}
+        {{ form_widget(partnerCreationFromUserForm.description, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(partnerCreationFromUserForm.description) }}
+        {{ form_help(partnerCreationFromUserForm.description) }}
+    </div>
+
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        {{ form_label(partnerCreationFromUserForm.service, 'Services globaux souscrits par ce partenaire pour ses structures', {'label_attr': {'class': 'my-label'}}) }}
+        {{ form_widget(partnerCreationFromUserForm.service, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(partnerCreationFromUserForm.service) }}
+        {{ form_help(partnerCreationFromUserForm.service) }}
+    </div>
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        {{ form_label(partnerCreationFromUserForm.is_active, 'Cocher si le partenaire est actif', {'label_attr': {'class': 'my-label'}}) }}
+        {{ form_widget(partnerCreationFromUserForm.is_active)}}
+        {{ form_errors(partnerCreationFromUserForm.is_active) }}
+        {{ form_help(partnerCreationFromUserForm.is_active) }}
+    </div>
+
+    <div class="my-5 p-3 col-6 offset-3 " >
+        <button type="submit" class="btn btn-submit">Créer ce partenaire</button>
+    </div>
+
+
+    {{ form_rest(partnerCreationFromUserForm) }}
+
+    {{ form_end(partnerCreationFromUserForm) }}
+
+    {#---------return boutons-------------#}
+    {{ include('partial/_return_to_annuaire.html.twig') }}
+    {#-----------------------------#}
+
+{% endblock %}

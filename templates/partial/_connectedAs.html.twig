@@ -1,0 +1,14 @@
+{% if app.user %}
+{#    <div class="row text-center bg-pink-reverse sticky-bottom ">#}
+
+    {# short sentence for device xs sm #}
+    <div class="row text-center bg-pink-reverse connectedAs d-block d-md-none ">
+        <p>(connecté) {{ app.user.email }}</p>
+    </div>
+
+    {# Longer sentence for larger device md lg xl xxl #}
+    <div class="row text-center bg-pink-reverse connectedAs d-none d-md-block ">
+        <p>Vous êtes connecté en tant que {{ app.user.email }}</p>
+    </div>
+
+{% endif %}

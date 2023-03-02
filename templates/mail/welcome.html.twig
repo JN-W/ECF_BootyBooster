@@ -1,0 +1,24 @@
+{% apply inline_css(source('@styles/email.css')) %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ email.subject }}</title>
+
+</head>
+<body>
+<img src="{{ absolute_url(asset('ressource/Booty Booster_logo.png')) }}" alt="booty logo">
+    <h1>Félicitations</h1>
+    <p>Vous avez été enregistré en tant qu'utilisateur de BootyBooster.</p>
+    <p>La création complète de votre compte utilisateur est en cours.</p>
+    <p>Vous recevrez bientot un lien pour vous connecter à l'annuaire des partenaires et structures de Booty Booster grâce aux identifiant et mots de passe que votre conseiller franchiseur vous a communiqués au téléphone</p>
+{#    <a href="{{ url('app_login') }}"> SE CONNECTER </a>#}
+{#    <img src="{{ absolute_url((asset('ressource/muscle_booty_background.png')))}}" alt="booty">#}
+{#    <img class="small-img" src="{{ email.image('@images/muscle_booty_background.png') }}" class="logo" alt="Booty Logo">#}
+</body>
+</html>
+
+{% endapply %}

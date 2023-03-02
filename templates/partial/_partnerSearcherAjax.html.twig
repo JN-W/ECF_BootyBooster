@@ -1,0 +1,55 @@
+
+
+<script>
+    //Ouverture jquery
+    $(() => {
+
+        // Ajout évènement sur barre de recherche
+        $('#search-partner').keyup(function () {
+            let userSearchText = $(this).val();
+            userSearchText = encodeURIComponent(userSearchText).toLowerCase();
+
+            if (userSearchText !== "")
+            {
+                $.ajax
+                (
+                    {
+                        type: 'POST',
+                        url: '{{ path('app_partner_searcher') }}',
+                        data: {userSearchText: userSearchText},
+                        success: function (data){
+                            $('.search-result').remove();
+                            if (data !== "")
+                            {
+                                for (let i = 0; i < data.length; i++) {
+                                    let current = JSON.parse(data[i]);
+                                    let url = `/partner/detail/${current['id']}`
+                                    $('#search-partner-result').append(`<a class="search-result list-group-item list-group-item-action" href="${url}">${current['name']}</a>`);
+                                }
+                            }
+                        }
+
+                    }
+                )
+            }
+        })
+
+        //Focus on search field while modal pop up
+        $("#exampleModal").on("shown.bs.modal", function(){
+            $(this).find("input").first().focus();
+        })
+
+        // Clean old results and input field when closed
+        $("#exampleModal").on("hidden.bs.modal", function(){
+            $('#search-partner').val('');
+            $('.search-result').remove();
+        })
+
+        // Code à essayer de la doc bootstrap pour le focus
+        // $('#myModal').on('shown.bs.modal', function () {
+        //     $('#myInput').trigger('focus')
+        // })
+
+        //Fermeture jquery
+    });
+</script>

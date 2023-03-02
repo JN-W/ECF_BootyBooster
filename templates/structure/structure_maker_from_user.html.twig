@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création d'une structure{% endblock %}
+
+{% block body %}
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        <h1>Création d'une structure</h1>
+    </div>
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        <p>Le partenaire que vous avez choisi pour cette nouvelle structure est : <strong>{{ partner.name }}</strong></p>
+        <p>La structure sera créee avec les services globaux de {{ partner.name }} :
+        <ul class="list-group list-group-flush">
+            {%  for key, service in partner.service %}
+                <li class="list-group-item">{{ partner.service | slice(key, 1)| join(', ') }}</li>
+            {% endfor %}
+        </ul>
+        </p>
+
+    </div>>
+
+    {{ form_start(structureCreationFromUserForm) }}
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        {{ form_label(structureCreationFromUserForm.address, 'Adresse de la structure', {'label_attr': {'class': 'my-label'}}) }}
+        {{ form_widget(structureCreationFromUserForm.address, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(structureCreationFromUserForm.address) }}
+        {{ form_help(structureCreationFromUserForm.address) }}
+    </div>
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        {{ form_label(structureCreationFromUserForm.is_active, 'Cocher pour activer', {'label_attr': {'class': 'my-label'}}) }}
+        {{ form_widget(structureCreationFromUserForm.is_active) }}
+        {{ form_errors(structureCreationFromUserForm.is_active) }}
+        {{ form_help(structureCreationFromUserForm.is_active) }}
+    </div>
+
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        <button type="submit" class="btn btn-submit">Ajouter cette structure à ce partenaire</button>
+    </div>
+
+    {{ form_rest(structureCreationFromUserForm) }}
+    {{ form_end(structureCreationFromUserForm) }}
+
+    {#---------return boutons-------------#}
+    {{ include('partial/_return_to_annuaire.html.twig') }}
+    {#-----------------------------#}
+
+
+{% endblock %}

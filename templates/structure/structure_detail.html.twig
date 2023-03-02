@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block body %}
+
+    {{ include('partial/_responsiveFirstRow.html.twig') }}
+        {# menuCommun is the left col in display #}
+        {{ include('partial/_menuCommun.html.twig') }}
+
+        {# Therefore the following must be in a col also #}
+
+        <div class="col">
+
+            <div class="row text-center">
+                <h1>Tableau de bord de la structure : {{ structure.address }}</h1>
+
+            </div>
+
+            {#---------------Structure data--------------#}
+            <div class="row">
+                <table class="table table-hover table-responsive table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                {% if app.user and is_granted('ROLE_FRANCHISE')  %}
+                                    <a href="{{ path('app_structure_data_update', {'id' : structure.id})}}" class="m-md-2 "><i class="bi bi-pen"></i></a>
+                                {% endif %}
+                                Informations sur cette structure
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                    <tr>
+                        <td>Adresse</td>
+                        <td>{{ structure.address }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Statut</td>
+                        <td>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input structure-switch" type="checkbox" role="switch" id="" {{ (structure.isActive) ? 'checked' : '' }} data-id="{{ structure.id }}">
+                                {#<label class="form-check-label" for="SwitchPartnerDetail">Désactivé / Actif </label>#}
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Structure du partenaire</td>
+                        <td>{{ structure.partner }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Compte utilisateur associé</td>
+                        <td>{{ structure.user }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            {#-----------------------------#}
+
+
+
+            {#---------------Structure service list--------------#}
+            <div class="row">
+                <table class="table table-hover table-responsive table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                {% if app.user and is_granted('ROLE_FRANCHISE')  %}
+                                    <a href="{{ path('app_structure_service_update', {'id' : structure.id})}}" class="m-md-2 "><i class="bi bi-pen"></i></a>
+                                {% endif %}
+                                Services de la structure
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="table-group-divider">
+                    {%  for key, service in structure.service %}
+                        <tr>
+                            <td>{{ structure.service | slice(key, 1)| join(', ') }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {#-----------------------------#}
+
+            {#---------return boutons-------------#}
+            {{ include('partial/_return_to_partner.html.twig') }}
+            {{ include('partial/_return_to_annuaire.html.twig') }}
+            {#-----------------------------#}
+
+        </div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edition d'un partenaire{% endblock %}
+
+{% block body %}
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        <h1>Edition du partenaire</h1>
+    </div>
+
+    {{ form_start(partnerDataUpdateForm) }}
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        {{ form_label(partnerDataUpdateForm.name, 'Modifier le nom du partenaire ?', {'label_attr': {'class': 'my-label'}}) }}
+        {{ form_widget(partnerDataUpdateForm.name, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(partnerDataUpdateForm.name) }}
+        {{ form_help(partnerDataUpdateForm.name) }}
+    </div>
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        {{ form_label(partnerDataUpdateForm.description, 'Modifier la description du partenaire', {'label_attr': {'class': 'my-label'}}) }}
+        {{ form_widget(partnerDataUpdateForm.description, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(partnerDataUpdateForm.description) }}
+        {{ form_help(partnerDataUpdateForm.description) }}
+    </div>
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        {{ form_label(partnerDataUpdateForm.user, 'Changer d\utilisateur ?', {'label_attr': {'class': 'my-label'}}) }}
+        {{ form_widget(partnerDataUpdateForm.user, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(partnerDataUpdateForm.user) }}
+        {{ form_help(partnerDataUpdateForm.user) }}
+    </div>
+
+
+
+    <div class="my-5 p-3 col-6 offset-3 " >
+        <button type="submit" class="btn btn-submit">Créer ce partenaire</button>
+    </div>
+
+
+    {{ form_rest(partnerDataUpdateForm) }}
+    {{ form_end(partnerDataUpdateForm) }}
+
+    {#---------return boutons-------------#}
+    {{ include('partial/_return_to_partner.html.twig') }}
+    {{ include('partial/_return_to_annuaire.html.twig') }}
+    {#-----------------------------#}
+
+{% endblock %}

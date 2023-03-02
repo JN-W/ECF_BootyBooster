@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ServiceController!{% endblock %}
+
+{% block body %}
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        <h1>Création d'un service</h1>
+    </div>
+
+    {{ form_start(serviceCreationForm) }}
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+    {#{{ form_row(serviceCreationForm.title) }}#}
+        {{ form_label(serviceCreationForm.title, 'Nom du service', {'label_attr': {'class': 'my-label'}}) }}
+        {{ form_widget(serviceCreationForm.title, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(serviceCreationForm.title) }}
+        {{ form_help(serviceCreationForm.title) }}
+    </div>
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+{#        {{ form_row(serviceCreationForm.partners) }}#}
+        {{ form_label(serviceCreationForm.partners, 'Partenaires qui disposent de ce service', {'label_attr': {'class': 'my-label'}}) }}
+        {{ form_widget(serviceCreationForm.partners, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(serviceCreationForm.partners) }}
+        {{ form_help(serviceCreationForm.partners) }}
+    </div>
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+{#    {{ form_row(serviceCreationForm.structures) }}#}
+        {{ form_label(serviceCreationForm.structures, 'Structures qui disposent de ce service', {'label_attr': {'class': 'my-label'}}) }}
+        {{ form_widget(serviceCreationForm.structures, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(serviceCreationForm.structures) }}
+        {{ form_help(serviceCreationForm.structures) }}
+    </div>
+
+
+    <div class="my-3 p-3 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        <button type="submit" class="btn btn-submit">Créer ce service</button>
+    </div>
+
+    {{ form_rest(serviceCreationForm) }}
+
+    {{ form_end(serviceCreationForm) }}
+
+    {#---------return boutons-------------#}
+    {{ include('partial/_return_to_annuaire.html.twig') }}
+    {#-----------------------------#}
+
+{% endblock %}
