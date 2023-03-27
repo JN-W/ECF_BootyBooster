@@ -18,8 +18,8 @@
 
 
             {#-----------------------------#}
-            <div class="row">
-                <table class="table table-hover table-responsive table-sm">
+            <div class="row table-responsive">
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th scope="col">Nom</th>
@@ -46,7 +46,11 @@
                             {% if app.user and is_granted('ROLE_FRANCHISE')  %}
                                 <td>
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input partner-switch" type="checkbox" role="switch" id="" {{ (partner.isActive) ? 'checked' : '' }} data-id="{{ partner.id }}">
+                                        <input class="form-check-input partner-switch"
+                                               type="checkbox"
+                                               role="switch"
+                                               id="" {{ (partner.isActive) ? 'checked' : '' }}
+                                               data-id="{{ partner.id }}">
                                     </div>
                                 </td>
                                 <td >

@@ -129,7 +129,6 @@ class PartnerController extends AbstractController
     #[security("is_granted('ROLE_FRANCHISE')")]
     public function partner_activater(Partner $partner, ManagerRegistry $doctrine)
     {
-        // Vérification à faire
         $partner->setIsActive(($partner->isIsActive()) ? false : true);
 
         $entityManager=$doctrine->getManager();
