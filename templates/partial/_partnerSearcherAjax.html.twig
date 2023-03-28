@@ -18,16 +18,29 @@
                         url: '{{ path('app_partner_searcher') }}',
                         data: {userSearchText: userSearchText},
                         success: function (data){
-                            console.log("début fonction success");
+                            console.log("---data---");
                             console.log(data);
+                            console.log(typeof data);
+                            console.log("----------");
 
                             $('.search-result').remove();
                             if (data !== "")
                             {
-                                console.log('enter the if résultat non vide');
+                                // console.log('enter the if résultat non vide');
                                 for (let i = 0; i < data.length; i++) {
+                                    console.log("---data[i]---");
+                                    console.log(data[i]);
+                                    console.log(typeof data[i]);
+                                    console.log("----------");
+
                                     let current = JSON.parse(data[i]);
-                                    console.log(current);
+                                    console.log("---JSON.parse(data[i])---");
+                                    console.log(JSON.parse(data[i]));
+                                    console.log(typeof JSON.parse(data[i]));
+                                    console.log("----------");
+
+
+
                                     let url = `/partner/detail/${current['id']}`;
                                     console.log(url);
                                     $('#search-partner-result').append(`<a class="search-result list-group-item list-group-item-action" href="${url}">${current['name']}</a>`);

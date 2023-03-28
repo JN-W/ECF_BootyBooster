@@ -166,6 +166,9 @@ class PartnerController extends AbstractController
 
         // Envoi de la réponse en JSON
         return new JsonResponse($JSON_formated_partner);
+//        return new JsonResponse($formated_partner);
+
+
     }
 
     #[Route('/partner/detail/{id}', name: 'app_partner_detail')]
