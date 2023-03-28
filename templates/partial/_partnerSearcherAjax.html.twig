@@ -31,14 +31,19 @@
                                     console.log("---data[i]---");
                                     console.log(data[i]);
                                     console.log(typeof data[i]);
+
+
+
                                     console.log("----------");
 
                                     let current = JSON.parse(data[i]);
+
                                     console.log("---JSON.parse(data[i])---");
                                     console.log(JSON.parse(data[i]));
                                     console.log(typeof JSON.parse(data[i]));
                                     console.log("----------");
-
+                                    console.log(current.id);
+                                    console.log(current.name);
 
 
                                     let url = `/partner/detail/${current['id']}`;
