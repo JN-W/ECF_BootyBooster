@@ -19,6 +19,7 @@
                         data: {userSearchText: userSearchText},
                         success: function (data){
                             console.log("début fonction success");
+                            console.log(data);
 
                             $('.search-result').remove();
                             if (data !== "")
@@ -26,7 +27,9 @@
                                 console.log('enter the if résultat non vide');
                                 for (let i = 0; i < data.length; i++) {
                                     let current = JSON.parse(data[i]);
-                                    let url = `/partner/detail/${current['id']}`
+                                    console.log(current);
+                                    let url = `/partner/detail/${current['id']}`;
+                                    console.log(url);
                                     $('#search-partner-result').append(`<a class="search-result list-group-item list-group-item-action" href="${url}">${current['name']}</a>`);
                                     console.log("inside the loop de résultats");
 
